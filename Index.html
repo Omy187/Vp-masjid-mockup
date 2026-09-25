@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manchester Central Mosque - Prayer Timetable</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mosqueGreen: '#00502B',
+                        mosqueDarkGreen: '#00381e',
+                        mosqueGold: '#E5C158',
+                        mosqueGoldDark: '#B89025',
+                        mosqueHeaderBg: '#d3aa36',
+                    },
+                    fontFamily: {
+                        arabic: ['"Amiri"', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; padding: 0 !important; margin: 0 !important; }
+            .print-container { box-shadow: none !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; border: none !important; }
+        }
+        
+        .timetable-table th, .timetable-table td {
+            border: 1px solid #000000;
+        }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #00502B; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- Top Bar Controls -->
+    <header class="no-print bg-mosqueDarkGreen text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <span class="bg-mosqueGold text-mosqueDarkGreen text-xs font-bold px-2.5 py-1 rounded">M14 5RU</span>
+                <h1 class="text-lg font-bold tracking-wide hidden sm:block">Manchester Central Mosque & Islamic Cultural Centre</h1>
+            </div>
+            
+            <div class="flex items-center gap-2 flex-wrap">
+                <a href="tel:07578359741" class="bg-red-700 hover:bg-red-800 text-white text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-md flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-phone-flip animate-pulse"></i>
+                    <span>Funeral Service 24/7: <strong class="underline">07578 359741</strong></span>
+                </a>
+
+                <button onclick="window.print()" class="bg-mosqueGold hover:bg-yellow-500 text-mosqueDarkGreen text-xs sm:text-sm font-bold px-3 py-1.5 rounded-md flex items-center gap-1.5 transition">
+                    <i class="fa-solid fa-print"></i>
+                    <span class="hidden sm:inline">Print / Save PDF</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow p-2 sm:p-4 md:p-6 lg:p-8 flex justify-center">
+        <div class="print-container bg-white shadow-2xl rounded-none w-full max-w-5xl overflow-hidden border border-gray-300">
+            
+            <!-- MOSQUE BANNER HEADER -->
+            <div class="relative bg-mosqueDarkGreen h-32 sm:h-44 md:h-52 overflow-hidden flex items-center justify-center">
+                <svg viewBox="0 0 1000 300" class="absolute w-full h-full object-cover opacity-90" preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                        <linearGradient id="headerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stop-color="#002b17" />
+                            <stop offset="50%" stop-color="#004d29" />
+                            <stop offset="100%" stop-color="#002011" />
+                        </linearGradient>
+                        <radialGradient id="domeGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#40a86d" stop-opacity="0.6"/>
+                            <stop offset="100%" stop-color="#00381e" stop-opacity="0"/>
+                        </radialGradient>
+                    </defs>
+
+                    <rect width="1000" height="300" fill="url(#headerGrad)" />
+                    <circle cx="500" cy="160" r="140" fill="url(#domeGlow)"/>
+
+                    <path d="M 60 300 L 60 100 L 50 100 L 50 80 L 60 80 L 60 40 L 52 40 L 52 30 L 65 10 L 78 30 L 78 40 L 70 40 L 70 80 L 80 80 L 80 100 L 70 100 L 70 300 Z" fill="#001a0a" opacity="0.8"/>
+                    <path d="M 160 300 L 160 80 L 150 80 L 150 60 L 160 60 L 160 30 L 152 30 L 152 20 L 165 5 L 178 20 L 178 30 L 170 30 L 170 60 L 180 60 L 180 80 L 170 80 L 170 300 Z" fill="#00240e" opacity="0.9"/>
+
+                    <g transform="translate(350, 40)">
+                        <rect x="50" y="160" width="200" height="100" fill="#00381e"/>
+                        <polygon points="60,160 80,120 220,120 240,160" fill="#004d29"/>
+                        <rect x="80" y="120" width="140" height="40" fill="#005d32"/>
+                        
+                        <rect x="95" y="130" width="12" height="20" rx="6" fill="#002613"/>
+                        <rect x="120" y="130" width="12" height="20" rx="6" fill="#002613"/>
+                        <rect x="144" y="130" width="12" height="20" rx="6" fill="#002613"/>
+                        <rect x="168" y="130" width="12" height="20" rx="6" fill="#002613"/>
+                        <rect x="193" y="130" width="12" height="20" rx="6" fill="#002613"/>
+                        
+                        <path d="M 70 120 C 70 30, 230 30, 230 120 Z" fill="#1b824a"/>
+                        <path d="M 70 120 C 70 30, 150 20, 150 120 Z" fill="#25a35e"/>
+
+                        <rect x="148" y="2" width="4" height="25" fill="#d4af37"/>
+                        <circle cx="150" cy="8" r="5" fill="#d4af37"/>
+                        <path d="M 148 -4 A 6 6 0 1 0 152 4 A 4.5 4.5 0 1 1 148 -4 Z" fill="#d4af37"/>
+                    </g>
+
+                    <path d="M 830 300 L 830 80 L 820 80 L 820 60 L 830 60 L 830 30 L 822 30 L 822 20 L 835 5 L 848 20 L 848 30 L 840 30 L 840 60 L 850 60 L 850 80 L 840 80 L 840 300 Z" fill="#00240e" opacity="0.9"/>
+                    <path d="M 930 300 L 930 100 L 920 100 L 920 80 L 930 80 L 930 40 L 922 40 L 922 30 L 935 10 L 948 30 L 948 40 L 940 40 L 940 80 L 950 80 L 950 100 L 940 100 L 940 300 Z" fill="#001a0a" opacity="0.8"/>
+                </svg>
+            </div>
+
+            <!-- GOLDEN HEADER SECTION -->
+            <div class="bg-[#d3aa36] border-t-4 border-b-4 border-mosqueDarkGreen p-3 sm:p-4 text-black relative">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+                    
+                    <div class="md:col-span-4 text-center md:text-left">
+                        <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-mosqueDarkGreen uppercase leading-none">
+                            PRAYER
+                        </h2>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-mosqueDarkGreen uppercase mt-0.5">
+                            TIMETABLE
+                        </h3>
+                        <div class="mt-1 flex items-center justify-center md:justify-start">
+                            <span class="bg-mosqueDarkGreen text-white font-bold text-sm sm:text-base px-3 py-0.5 tracking-wider uppercase inline-block">
+                                SEPTEMBER 2026
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- MOSQUE LOGO -->
+                    <div class="md:col-span-4 flex justify-center my-1 md:my-0">
+                        <div class="relative flex flex-col items-center">
+                            <div class="w-28 h-32 sm:w-32 sm:h-36 bg-mosqueDarkGreen rounded-t-full border-2 border-mosqueDarkGreen flex flex-col items-center justify-between p-1.5 text-center text-white shadow-lg relative">
+                                
+                                <div class="text-[8px] sm:text-[9px] leading-tight font-medium text-amber-200 uppercase mt-1">
+                                    Charity Registration<br/>No: 1081649
+                                </div>
+
+                                <svg class="w-16 h-14 sm:w-20 sm:h-16 text-white my-1" viewBox="0 0 100 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M 25 75 L 25 45 C 25 25, 75 25, 75 45 L 75 75" stroke-width="2"/>
+                                    <path d="M 35 45 C 35 20, 65 20, 65 45" stroke-width="2.5"/>
+                                    <path d="M 50 20 L 50 10" stroke-width="2"/>
+                                    <circle cx="50" cy="8" r="2.5" fill="currentColor"/>
+                                    <path d="M 15 75 L 15 25 L 12 25 L 12 18 L 15 18 L 15 8 L 18 3 L 21 8 L 21 18 L 24 18 L 24 25 L 21 25 L 21 75" stroke-width="2"/>
+                                    <path d="M 79 75 L 79 25 L 76 25 L 76 18 L 79 18 L 79 8 L 82 3 L 85 8 L 85 18 L 88 18 L 88 25 L 85 25 L 85 75" stroke-width="2"/>
+                                    <line x1="5" y1="75" x2="95" y2="75" stroke-width="3"/>
+                                </svg>
+
+                                <div class="text-[9px] sm:text-[10px] font-black tracking-tighter uppercase leading-tight text-white mb-1">
+                                    MANCHESTER CENTRAL<br/>
+                                    <span class="text-amber-300 font-extrabold text-[11px]">MOSQUE</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-4 text-center md:text-right flex flex-col justify-center">
+                        <div class="font-arabic text-2xl sm:text-3xl font-bold text-mosqueDarkGreen leading-tight" dir="rtl">
+                            مرکزی جامع مسجد مانچسٹر وکٹوریہ پارک
+                        </div>
+                        <h1 class="text-lg sm:text-xl font-black text-mosqueDarkGreen tracking-tight leading-tight mt-1">
+                            MANCHESTER
+                        </h1>
+                        <h2 class="text-base sm:text-lg font-extrabold text-mosqueDarkGreen tracking-tight leading-none">
+                            CENTRAL MOSQUE
+                        </h2>
+                        <p class="text-xs font-bold text-mosqueDarkGreen tracking-normal mt-0.5">
+                            & ISLAMIC CULTURAL CENTRE
+                        </p>
+                        <p class="text-xs sm:text-sm font-black text-mosqueDarkGreen tracking-widest uppercase mt-1 border-t border-mosqueDarkGreen pt-0.5 inline-block">
+                            JAMIAT-UL-MUSLIMIN
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-3 pt-2 border-t border-mosqueDarkGreen/40 text-center text-xs sm:text-sm font-bold text-mosqueDarkGreen">
+                    20 Upper Park Road, Victoria Park, Manchester, M14 5RU &nbsp;|&nbsp; 
+                    <span class="inline-block">TEL: 0161 224 4119</span> &nbsp;|&nbsp; 
+                    <span class="inline-block">FAX: 0161 248 0283</span>
+                </div>
+            </div>
+
+            <!-- PRAYER TABLE -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-center border-collapse text-xs sm:text-sm font-semibold timetable-table">
+                    <thead>
+                        <tr class="bg-mosqueDarkGreen text-white text-xs sm:text-sm">
+                            <th colspan="3" class="py-1 px-1 border-r border-white/30 font-bold uppercase">Date / Calendar</th>
+                            <th colspan="7" class="py-1 px-1 border-r border-white/30 font-bold bg-mosqueDarkGreen">
+                                <span class="text-amber-300 font-arabic text-base mr-2">ابتداءالاوقت</span>
+                                PRAYER START TIMES
+                            </th>
+                            <th colspan="5" class="py-1 px-1 font-bold bg-mosqueDarkGreen">
+                                <span class="text-amber-300 font-arabic text-base mr-2">اوقات جماعت</span>
+                                JAMA'AT TIMES
+                            </th>
+                        </tr>
+
+                        <tr class="bg-mosqueDarkGreen text-amber-300 text-[10px] sm:text-xs">
+                            <th class="py-1 px-0.5 w-7 bg-mosqueDarkGreen text-white">
+                                SEP<br/><span class="font-arabic text-xs font-normal">ستمبر</span>
+                            </th>
+                            <th class="py-1 px-0.5 w-9 bg-mosqueDarkGreen text-white">
+                                DAY<br/><span class="font-arabic text-xs font-normal">دن</span>
+                            </th>
+                            <th class="py-1 px-0.5 w-16 bg-mosqueDarkGreen text-white text-[9px] sm:text-[10px]">
+                                RABI UL AWWAL<br/><span class="font-arabic text-xs font-normal">ربیع الأول</span>
+                            </th>
+
+                            <th class="py-1 px-1">FAJR<br/><span class="font-arabic text-xs font-normal text-white">فجر</span></th>
+                            <th class="py-1 px-1">SUNRISE<br/><span class="font-arabic text-xs font-normal text-white">طلوع</span></th>
+                            <th class="py-1 px-1">ZAWAL<br/><span class="font-arabic text-xs font-normal text-white">زوال</span></th>
+                            <th class="py-1 px-1">ZUHR<br/><span class="font-arabic text-xs font-normal text-white">ظہر</span></th>
+                            <th class="py-1 px-1">ASR<br/><span class="font-arabic text-xs font-normal text-white">عصر</span></th>
+                            <th class="py-1 px-1">SUNSET<br/><span class="font-arabic text-xs font-normal text-white">غروب</span></th>
+                            <th class="py-1 px-1 border-r-2 border-mosqueGold">ISHA<br/><span class="font-arabic text-xs font-normal text-white">عشاء</span></th>
+
+                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">FAJR<br/><span class="font-arabic text-xs font-normal text-white">فجر</span></th>
+                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">ZUHR<br/><span class="font-arabic text-xs font-normal text-white">ظہر</span></th>
+                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">ASR<br/><span class="font-arabic text-xs font-normal text-white">عصر</span></th>
+                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">MAGHRIB<br/><span class="font-arabic text-xs font-normal text-white">مغرب</span></th>
+                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">ISHA<br/><span class="font-arabic text-xs font-normal text-white">عشاء</span></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="timetableBody" class="text-black text-xs sm:text-sm font-semibold">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="bg-mosqueGold border-t-2 border-mosqueDarkGreen text-mosqueDarkGreen font-bold p-3 text-xs sm:text-sm leading-snug">
+                <div class="text-center font-extrabold text-sm sm:text-base border-b border-mosqueDarkGreen/30 pb-1.5 mb-2">
+                    1st Jumah prayer is at 1.15pm ( Jama'at at 1.30). &nbsp; 2nd prayer will be at 2.15 (Jama'at at 2.30pm)
+                </div>
+
+                <div class="text-center mb-1">
+                    Need any more info , pls contact <a href="mailto:religious-affairs@manchestercentralmosque.org" class="underline hover:text-black">religious-affairs@manchestercentralmosque.org</a>
+                </div>
+
+                <div class="bg-mosqueDarkGreen text-white text-center py-1.5 px-2 rounded my-1 text-sm sm:text-base font-black tracking-wide">
+                    Funeral Service ( 24 hours) Mob: <a href="tel:07578359741" class="text-amber-300 underline">07578 359741</a>
+                </div>
+
+                <div class="flex flex-wrap justify-between items-center text-[11px] sm:text-xs pt-1 px-2 font-bold">
+                    <span>web: <a href="https://www.manchestercentralmosque.org" target="_blank" class="underline">www.manchestercentralmosque.org</a></span>
+                    <span>email: <a href="mailto:info@manchestercentralmosque.org" class="underline">info@manchestercentralmosque.org</a></span>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        const septemberData = [
+            { sep: 1, day: "TUE", hijri: 19, fajrBeg: "4:04", sunrise: "6:18", zawal: "12:03", zuhrBeg: "1:09", asrBeg: "5:49", sunset: "7:59", ishaBeg: "9:45", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "8:02", ishaJam: "10:15" },
+            { sep: 2, day: "WED", hijri: 20, fajrBeg: "4:07", sunrise: "6:20", zawal: "12:03", zuhrBeg: "1:09", asrBeg: "5:47", sunset: "7:56", ishaBeg: "9:42", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:59", ishaJam: "10:15" },
+            { sep: 3, day: "THU", hijri: 21, fajrBeg: "4:10", sunrise: "6:21", zawal: "12:03", zuhrBeg: "1:08", asrBeg: "5:45", sunset: "7:54", ishaBeg: "9:39", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:57", ishaJam: "10:15" },
+            { sep: 4, day: "FRI", hijri: 22, fajrBeg: "4:12", sunrise: "6:23", zawal: "12:03", zuhrBeg: "1:08", asrBeg: "5:43", sunset: "7:52", ishaBeg: "9:36", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:55", ishaJam: "9:45", isFriday: true },
+            { sep: 5, day: "SAT", hijri: 23, fajrBeg: "4:15", sunrise: "6:25", zawal: "12:03", zuhrBeg: "1:08", asrBeg: "5:42", sunset: "7:49", ishaBeg: "9:33", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:52", ishaJam: "9:45" },
+            { sep: 6, day: "SUN", hijri: 24, fajrBeg: "4:17", sunrise: "6:27", zawal: "12:03", zuhrBeg: "1:07", asrBeg: "5:40", sunset: "7:47", ishaBeg: "9:30", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:50", ishaJam: "9:45" },
+            { sep: 7, day: "MON", hijri: 25, fajrBeg: "4:20", sunrise: "6:28", zawal: "12:03", zuhrBeg: "1:07", asrBeg: "5:38", sunset: "7:44", ishaBeg: "9:27", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:47", ishaJam: "9:45" },
+            { sep: 8, day: "TUE", hijri: 26, fajrBeg: "4:22", sunrise: "6:30", zawal: "12:03", zuhrBeg: "1:07", asrBeg: "5:36", sunset: "7:42", ishaBeg: "9:24", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:45", ishaJam: "9:45" },
+            { sep: 9, day: "WED", hijri: 27, fajrBeg: "4:25", sunrise: "6:32", zawal: "12:04", zuhrBeg: "1:06", asrBeg: "5:34", sunset: "7:40", ishaBeg: "9:22", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:43", ishaJam: "9:45" },
+            { sep: 10, day: "THU", hijri: 28, fajrBeg: "4:27", sunrise: "6:34", zawal: "12:03", zuhrBeg: "1:06", asrBeg: "5:32", sunset: "7:37", ishaBeg: "9:19", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:40", ishaJam: "9:45" },
+            { sep: 11, day: "FRI", hijri: 29, fajrBeg: "4:30", sunrise: "6:35", zawal: "12:04", zuhrBeg: "1:06", asrBeg: "5:30", sunset: "7:35", ishaBeg: "9:16", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:38", ishaJam: "9:30", isFriday: true },
+            { sep: 12, day: "SAT", hijri: 30, fajrBeg: "4:32", sunrise: "6:37", zawal: "12:03", zuhrBeg: "1:05", asrBeg: "5:28", sunset: "7:32", ishaBeg: "9:13", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:35", ishaJam: "9:30" },
+            
+            { isDivider: true, text: "Rabī' al-Ākhir (ربيع الآخر)" },
+
+            { sep: 13, day: "SUN", hijri: 1, fajrBeg: "4:35", sunrise: "6:39", zawal: "12:04", zuhrBeg: "1:05", asrBeg: "5:26", sunset: "7:30", ishaBeg: "9:10", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:33", ishaJam: "9:30" },
+            { sep: 14, day: "MON", hijri: 2, fajrBeg: "4:37", sunrise: "6:41", zawal: "12:03", zuhrBeg: "1:05", asrBeg: "5:24", sunset: "7:27", ishaBeg: "9:07", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:30", ishaJam: "9:30" },
+            { sep: 15, day: "TUE", hijri: 3, fajrBeg: "4:39", sunrise: "6:42", zawal: "12:03", zuhrBeg: "1:04", asrBeg: "5:22", sunset: "7:25", ishaBeg: "9:04", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:28", ishaJam: "9:30" },
+            { sep: 16, day: "WED", hijri: 4, fajrBeg: "4:41", sunrise: "6:44", zawal: "12:03", zuhrBeg: "1:04", asrBeg: "5:20", sunset: "7:22", ishaBeg: "9:02", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:25", ishaJam: "9:30" },
+            { sep: 17, day: "THU", hijri: 5, fajrBeg: "4:44", sunrise: "6:46", zawal: "12:03", zuhrBeg: "1:04", asrBeg: "5:18", sunset: "7:20", ishaBeg: "8:59", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:23", ishaJam: "9:30" },
+            { sep: 18, day: "FRI", hijri: 6, fajrBeg: "4:46", sunrise: "6:48", zawal: "12:03", zuhrBeg: "1:03", asrBeg: "5:16", sunset: "7:18", ishaBeg: "8:56", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:21", ishaJam: "9:15", isFriday: true },
+            { sep: 19, day: "SAT", hijri: 7, fajrBeg: "4:48", sunrise: "6:49", zawal: "12:03", zuhrBeg: "1:03", asrBeg: "5:14", sunset: "7:15", ishaBeg: "8:53", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:18", ishaJam: "9:15" },
+            { sep: 20, day: "SUN", hijri: 8, fajrBeg: "4:50", sunrise: "6:51", zawal: "12:03", zuhrBeg: "1:02", asrBeg: "5:12", sunset: "7:13", ishaBeg: "8:51", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:16", ishaJam: "9:15" },
+            { sep: 21, day: "MON", hijri: 9, fajrBeg: "4:52", sunrise: "6:53", zawal: "12:02", zuhrBeg: "1:02", asrBeg: "5:10", sunset: "7:10", ishaBeg: "8:48", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:13", ishaJam: "9:15" },
+            { sep: 22, day: "TUE", hijri: 10, fajrBeg: "4:55", sunrise: "6:55", zawal: "12:03", zuhrBeg: "1:02", asrBeg: "5:08", sunset: "7:08", ishaBeg: "8:45", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:11", ishaJam: "9:15" },
+            { sep: 23, day: "WED", hijri: 11, fajrBeg: "4:57", sunrise: "6:56", zawal: "12:02", zuhrBeg: "1:01", asrBeg: "5:05", sunset: "7:05", ishaBeg: "8:43", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:08", ishaJam: "9:15" },
+            { sep: 24, day: "THU", hijri: 12, fajrBeg: "4:59", sunrise: "6:58", zawal: "12:02", zuhrBeg: "1:01", asrBeg: "5:03", sunset: "7:03", ishaBeg: "8:40", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:06", ishaJam: "9:15" },
+            { sep: 25, day: "FRI", hijri: 13, fajrBeg: "5:01", sunrise: "7:00", zawal: "12:02", zuhrBeg: "1:01", asrBeg: "5:01", sunset: "7:00", ishaBeg: "8:37", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "7:03", ishaJam: "9:00", isFriday: true },
+            { sep: 26, day: "SAT", hijri: 14, fajrBeg: "5:03", sunrise: "7:02", zawal: "12:02", zuhrBeg: "1:00", asrBeg: "4:59", sunset: "6:58", ishaBeg: "8:35", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "7:01", ishaJam: "9:00" },
+            { sep: 27, day: "SUN", hijri: 15, fajrBeg: "5:05", sunrise: "7:03", zawal: "12:02", zuhrBeg: "1:00", asrBeg: "4:57", sunset: "6:56", ishaBeg: "8:32", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "6:59", ishaJam: "9:00" },
+            { sep: 28, day: "MON", hijri: 16, fajrBeg: "5:07", sunrise: "7:05", zawal: "12:01", zuhrBeg: "1:00", asrBeg: "4:55", sunset: "6:53", ishaBeg: "8:29", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "6:56", ishaJam: "9:00" },
+            { sep: 29, day: "TUE", hijri: 17, fajrBeg: "5:09", sunrise: "7:07", zawal: "12:01", zuhrBeg: "12:59", asrBeg: "4:53", sunset: "6:51", ishaBeg: "8:27", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "6:54", ishaJam: "9:00" },
+            { sep: 30, day: "WED", hijri: 18, fajrBeg: "5:11", sunrise: "7:09", zawal: "12:01", zuhrBeg: "12:59", asrBeg: "4:51", sunset: "6:48", ishaBeg: "8:24", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "6:51", ishaJam: "9:00" }
+        ];
+
+        function renderTable() {
+            const tbody = document.getElementById('timetableBody');
+            tbody.innerHTML = '';
+
+            septemberData.forEach((row) => {
+                if (row.isDivider) {
+                    const tr = document.createElement('tr');
+                    tr.className = 'bg-[#d3aa36] text-mosqueDarkGreen font-bold py-1';
+                    tr.innerHTML = `
+                        <td colspan="15" class="py-1 px-2 text-center text-xs sm:text-sm font-black border-y border-black uppercase tracking-wider">
+                            ${row.text}
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                    return;
+                }
+
+                const tr = document.createElement('tr');
+                
+                if (row.isFriday) {
+                    tr.className = 'bg-[#00502B] text-white font-bold hover:bg-emerald-900 transition-colors';
+                } else {
+                    tr.className = 'bg-white hover:bg-yellow-50 text-black transition-colors';
+                }
+
+                const bgStart = row.isFriday ? 'bg-[#00502B] text-white' : 'bg-[#e6efe9] text-black';
+                const bgJam = row.isFriday ? 'bg-[#00381e] text-amber-300' : 'bg-[#e6efe9] text-black';
+                const dayColor = row.isFriday ? 'text-amber-300 font-black' : 'text-black';
+
+                tr.innerHTML = `
+                    <td class="py-1 px-0.5 font-bold ${dayColor}">${row.sep}</td>
+                    <td class="py-1 px-0.5 font-bold ${dayColor}">${row.day}</td>
+                    <td class="py-1 px-0.5 font-bold ${dayColor}">${row.hijri}</td>
+
+                    <td class="py-1 px-0.5 ${bgStart}">${row.fajrBeg}</td>
+                    <td class="py-1 px-0.5 ${bgStart}">${row.sunrise}</td>
+                    <td class="py-1 px-0.5 ${bgStart}">${row.zawal}</td>
+                    <td class="py-1 px-0.5 ${bgStart}">${row.zuhrBeg}</td>
+                    <td class="py-1 px-0.5 ${bgStart}">${row.asrBeg}</td>
+                    <td class="py-1 px-0.5 ${bgStart}">${row.sunset}</td>
+                    <td class="py-1 px-0.5 ${bgStart} border-r-2 border-mosqueGold">${row.ishaBeg}</td>
+
+                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.fajrJam}</td>
+                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.zuhrJam}</td>
+                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.asrJam}</td>
+                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.maghribJam}</td>
+                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.ishaJam}</td>
+                `;
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderTable);
+    </script>
+</body>
+</html>
