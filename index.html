@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manchester Central Mosque - Prayer Timetable</title>
+    <title>Manchester Central Mosque & Islamic Cultural Centre | Victoria Park</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FontAwesome Icons CDN -->
+    <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -23,9 +23,9 @@
                     colors: {
                         mosqueGreen: '#00502B',
                         mosqueDarkGreen: '#00381e',
-                        mosqueGold: '#E5C158',
+                        mosqueGold: '#d3aa36',
                         mosqueGoldDark: '#B89025',
-                        mosqueHeaderBg: '#d3aa36',
+                        mosqueLightBg: '#f4f7f4',
                     },
                     fontFamily: {
                         arabic: ['"Amiri"', 'serif'],
@@ -35,236 +35,546 @@
             }
         };
     </script>
-    
     <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(0, 56, 30, 0.95) 0%, rgba(0, 80, 43, 0.88) 100%), url('https://images.unsplash.com/photo-1542810634-71277d95dcbb?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        .prayer-card-active {
+            border-color: #d3aa36;
+            background-color: #00381e;
+            color: #ffffff;
+            box-shadow: 0 10px 25px -5px rgba(211, 170, 54, 0.3);
+        }
+        .tab-page {
+            display: none;
+        }
+        .tab-page.active-page {
+            display: block;
+        }
         @media print {
             .no-print { display: none !important; }
             body { background: white !important; padding: 0 !important; margin: 0 !important; }
             .print-container { box-shadow: none !important; max-width: 100% !important; width: 100% !important; padding: 0 !important; margin: 0 !important; border: none !important; }
         }
-        
         .timetable-table th, .timetable-table td {
             border: 1px solid #000000;
         }
-
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #00502B; border-radius: 4px; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900 font-sans min-h-screen flex flex-col justify-between antialiased">
+<body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col justify-between antialiased">
 
-    <!-- Top Bar Controls -->
-    <header class="no-print bg-mosqueDarkGreen text-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-3">
-            <div class="flex items-center space-x-3">
-                <span class="bg-mosqueGold text-mosqueDarkGreen text-xs font-bold px-2.5 py-1 rounded">M14 5RU</span>
-                <h1 class="text-lg font-bold tracking-wide hidden sm:block">Manchester Central Mosque & Islamic Cultural Centre</h1>
+    <!-- TOP EMERGENCY & UTILITY BAR -->
+    <div class="bg-red-800 text-white text-xs sm:text-sm py-2 px-4 shadow-inner no-print">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-2 font-bold">
+                <span class="bg-red-900 text-white px-2 py-0.5 rounded text-[10px] tracking-widest uppercase animate-pulse">24/7 EMERGENCY</span>
+                <i class="fa-solid fa-phone-flip"></i>
+                <span>Funeral Service: <a href="tel:07578359741" class="underline font-extrabold text-amber-300">07578 359741</a></span>
             </div>
-            
-            <div class="flex items-center gap-2 flex-wrap">
-                <a href="tel:07578359741" class="bg-red-700 hover:bg-red-800 text-white text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-md flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-phone-flip animate-pulse"></i>
-                    <span>Funeral Service 24/7: <strong class="underline">07578 359741</strong></span>
-                </a>
+            <div class="flex items-center gap-4 text-xs font-medium">
+                <span><i class="fa-solid fa-location-dot text-amber-300 mr-1"></i> 20 Upper Park Rd, Victoria Park, M14 5RU</span>
+                <span class="hidden md:inline"><i class="fa-solid fa-phone text-amber-300 mr-1"></i> 0161 224 4119</span>
+            </div>
+        </div>
+    </div>
 
-                <button onclick="window.print()" class="bg-mosqueGold hover:bg-yellow-500 text-mosqueDarkGreen text-xs sm:text-sm font-bold px-3 py-1.5 rounded-md flex items-center gap-1.5 transition">
-                    <i class="fa-solid fa-print"></i>
-                    <span class="hidden sm:inline">Print / Save PDF</span>
+    <!-- MAIN NAVIGATION HEADER -->
+    <header class="bg-mosqueDarkGreen text-white sticky top-0 z-50 shadow-xl border-b-4 border-mosqueGold no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- BRAND LOGO -->
+                <button onclick="switchTab('home')" class="flex items-center gap-3 text-left focus:outline-none">
+                    <div class="w-12 h-14 bg-mosqueGold rounded-t-full flex items-center justify-center p-1 shadow-md border border-amber-300">
+                        <i class="fa-solid fa-mosque text-mosqueDarkGreen text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="block text-lg font-black tracking-tight leading-none text-white">MANCHESTER CENTRAL MOSQUE</span>
+                        <span class="block text-xs font-bold text-amber-300 tracking-wider uppercase mt-0.5">& Islamic Cultural Centre (Victoria Park)</span>
+                    </div>
+                </button>
+
+                <!-- DESKTOP NAV LINKS -->
+                <nav class="hidden lg:flex items-center gap-6 font-bold text-sm tracking-wide">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn text-amber-300 border-b-2 border-amber-300 pb-1">HOME</button>
+                    <button onclick="switchTab('timetable')" id="nav-timetable" class="nav-btn hover:text-amber-300 transition-colors pb-1">PRAYER TIMETABLE</button>
+                    <button onclick="switchTab('omof')" id="nav-omof" class="nav-btn hover:text-amber-300 transition-colors pb-1">OUR MASJID OUR FUTURE</button>
+                    <button onclick="switchTab('services')" id="nav-services" class="nav-btn hover:text-amber-300 transition-colors pb-1">SERVICES & QA</button>
+                    <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn hover:text-amber-300 transition-colors pb-1">CONTACT</button>
+                </nav>
+
+                <!-- DONATE CTA BUTTON -->
+                <div class="hidden sm:flex items-center gap-3">
+                    <button onclick="switchTab('donate')" class="bg-mosqueGold hover:bg-yellow-500 text-mosqueDarkGreen font-extrabold px-5 py-2.5 rounded-md shadow-md hover:shadow-lg transition flex items-center gap-2">
+                        <i class="fa-solid fa-heart"></i>
+                        <span>DONATE ONLINE</span>
+                    </button>
+                </div>
+
+                <!-- MOBILE MENU BUTTON -->
+                <button onclick="toggleMobileMenu()" class="lg:hidden text-2xl text-amber-300 focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
         </div>
+
+        <!-- MOBILE DROPDOWN MENU -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-mosqueDarkGreen border-t border-emerald-900 px-4 pt-2 pb-6 space-y-3">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="block w-full text-left font-bold text-amber-300 py-1">Home</button>
+            <button onclick="switchTab('timetable'); toggleMobileMenu();" class="block w-full text-left font-bold text-white hover:text-amber-300 py-1">Prayer Timetable</button>
+            <button onclick="switchTab('omof'); toggleMobileMenu();" class="block w-full text-left font-bold text-white hover:text-amber-300 py-1">Our Masjid Our Future</button>
+            <button onclick="switchTab('services'); toggleMobileMenu();" class="block w-full text-left font-bold text-white hover:text-amber-300 py-1">Services & QA</button>
+            <button onclick="switchTab('contact'); toggleMobileMenu();" class="block w-full text-left font-bold text-white hover:text-amber-300 py-1">Contact Us</button>
+            <button onclick="switchTab('donate'); toggleMobileMenu();" class="block w-full text-center bg-mosqueGold text-mosqueDarkGreen font-bold py-2.5 rounded mt-2">Donate Online</button>
+        </div>
     </header>
 
-    <main class="flex-grow p-2 sm:p-4 md:p-6 lg:p-8 flex justify-center">
-        <div class="print-container bg-white shadow-2xl rounded-none w-full max-w-5xl overflow-hidden border border-gray-300">
+    <!-- MAIN CONTENT CONTAINER WITH PAGE TABS -->
+    <main class="flex-grow">
+
+        <!-- PAGE 1: HOME -->
+        <div id="page-home" class="tab-page active-page">
             
-            <!-- MOSQUE BANNER HEADER -->
-            <div class="relative bg-mosqueDarkGreen h-32 sm:h-44 md:h-52 overflow-hidden flex items-center justify-center">
-                <svg viewBox="0 0 1000 300" class="absolute w-full h-full object-cover opacity-90" preserveAspectRatio="xMidYMid slice">
-                    <defs>
-                        <linearGradient id="headerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#002b17" />
-                            <stop offset="50%" stop-color="#004d29" />
-                            <stop offset="100%" stop-color="#002011" />
-                        </linearGradient>
-                        <radialGradient id="domeGlow" cx="50%" cy="50%" r="50%">
-                            <stop offset="0%" stop-color="#40a86d" stop-opacity="0.6"/>
-                            <stop offset="100%" stop-color="#00381e" stop-opacity="0"/>
-                        </radialGradient>
-                    </defs>
-
-                    <rect width="1000" height="300" fill="url(#headerGrad)" />
-                    <circle cx="500" cy="160" r="140" fill="url(#domeGlow)"/>
-
-                    <path d="M 60 300 L 60 100 L 50 100 L 50 80 L 60 80 L 60 40 L 52 40 L 52 30 L 65 10 L 78 30 L 78 40 L 70 40 L 70 80 L 80 80 L 80 100 L 70 100 L 70 300 Z" fill="#001a0a" opacity="0.8"/>
-                    <path d="M 160 300 L 160 80 L 150 80 L 150 60 L 160 60 L 160 30 L 152 30 L 152 20 L 165 5 L 178 20 L 178 30 L 170 30 L 170 60 L 180 60 L 180 80 L 170 80 L 170 300 Z" fill="#00240e" opacity="0.9"/>
-
-                    <g transform="translate(350, 40)">
-                        <rect x="50" y="160" width="200" height="100" fill="#00381e"/>
-                        <polygon points="60,160 80,120 220,120 240,160" fill="#004d29"/>
-                        <rect x="80" y="120" width="140" height="40" fill="#005d32"/>
+            <!-- HERO SECTION -->
+            <section class="hero-gradient text-white py-16 lg:py-24 relative overflow-hidden">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                         
-                        <rect x="95" y="130" width="12" height="20" rx="6" fill="#002613"/>
-                        <rect x="120" y="130" width="12" height="20" rx="6" fill="#002613"/>
-                        <rect x="144" y="130" width="12" height="20" rx="6" fill="#002613"/>
-                        <rect x="168" y="130" width="12" height="20" rx="6" fill="#002613"/>
-                        <rect x="193" y="130" width="12" height="20" rx="6" fill="#002613"/>
-                        
-                        <path d="M 70 120 C 70 30, 230 30, 230 120 Z" fill="#1b824a"/>
-                        <path d="M 70 120 C 70 30, 150 20, 150 120 Z" fill="#25a35e"/>
-
-                        <rect x="148" y="2" width="4" height="25" fill="#d4af37"/>
-                        <circle cx="150" cy="8" r="5" fill="#d4af37"/>
-                        <path d="M 148 -4 A 6 6 0 1 0 152 4 A 4.5 4.5 0 1 1 148 -4 Z" fill="#d4af37"/>
-                    </g>
-
-                    <path d="M 830 300 L 830 80 L 820 80 L 820 60 L 830 60 L 830 30 L 822 30 L 822 20 L 835 5 L 848 20 L 848 30 L 840 30 L 840 60 L 850 60 L 850 80 L 840 80 L 840 300 Z" fill="#00240e" opacity="0.9"/>
-                    <path d="M 930 300 L 930 100 L 920 100 L 920 80 L 930 80 L 930 40 L 922 40 L 922 30 L 935 10 L 948 30 L 948 40 L 940 40 L 940 80 L 950 80 L 950 100 L 940 100 L 940 300 Z" fill="#001a0a" opacity="0.8"/>
-                </svg>
-            </div>
-
-            <!-- GOLDEN HEADER SECTION -->
-            <div class="bg-[#d3aa36] border-t-4 border-b-4 border-mosqueDarkGreen p-3 sm:p-4 text-black relative">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
-                    
-                    <div class="md:col-span-4 text-center md:text-left">
-                        <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-mosqueDarkGreen uppercase leading-none">
-                            PRAYER
-                        </h2>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-mosqueDarkGreen uppercase mt-0.5">
-                            TIMETABLE
-                        </h3>
-                        <div class="mt-1 flex items-center justify-center md:justify-start">
-                            <span class="bg-mosqueDarkGreen text-white font-bold text-sm sm:text-base px-3 py-0.5 tracking-wider uppercase inline-block">
-                                SEPTEMBER 2026
+                        <div class="md:col-span-7 space-y-4">
+                            <span class="inline-block bg-amber-400 text-mosqueDarkGreen font-black text-xs px-3 py-1 rounded-full uppercase tracking-widest">
+                                Welcome to Manchester Central Mosque
                             </span>
+                            <h1 class="text-3xl sm:text-5xl font-black leading-tight tracking-tight">
+                                Serving Victoria Park & The North West Muslim Community Since 1948
+                            </h1>
+                            <p class="text-gray-200 text-base sm:text-lg max-w-2xl font-normal leading-relaxed">
+                                A place of spiritual refuge, daily congregational prayers, sacred Islamic learning, and community welfare.
+                            </p>
+                            <div class="pt-2 flex flex-wrap justify-center md:justify-start gap-4">
+                                <button onclick="switchTab('timetable')" class="bg-mosqueGold hover:bg-yellow-500 text-mosqueDarkGreen font-black px-6 py-3 rounded-lg shadow-lg transition flex items-center gap-2">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                    <span>View Full Timetable</span>
+                                </button>
+                                <button onclick="switchTab('donate')" class="bg-white/10 hover:bg-white/20 text-white font-bold px-6 py-3 rounded-lg border border-white/30 backdrop-blur-sm transition flex items-center gap-2">
+                                    <i class="fa-solid fa-hand-holding-dollar"></i>
+                                    <span>Support The House of Allah</span>
+                                </button>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- MOSQUE LOGO -->
-                    <div class="md:col-span-4 flex justify-center my-1 md:my-0">
-                        <div class="relative flex flex-col items-center">
-                            <div class="w-28 h-32 sm:w-32 sm:h-36 bg-mosqueDarkGreen rounded-t-full border-2 border-mosqueDarkGreen flex flex-col items-center justify-between p-1.5 text-center text-white shadow-lg relative">
-                                
-                                <div class="text-[8px] sm:text-[9px] leading-tight font-medium text-amber-200 uppercase mt-1">
-                                    Charity Registration<br/>No: 1081649
+                        <!-- TODAY'S PRAYER CARD -->
+                        <div class="md:col-span-5">
+                            <div class="bg-white text-gray-900 rounded-2xl shadow-2xl overflow-hidden border-2 border-mosqueGold">
+                                <div class="bg-mosqueDarkGreen text-white p-4 text-center relative">
+                                    <span class="text-xs font-bold uppercase tracking-widest text-amber-300">Today's Congregational Schedule</span>
+                                    <h3 class="text-2xl font-black mt-1" id="currentDateDisplay">Today</h3>
+                                    <p class="text-xs text-gray-300 font-arabic mt-0.5">Manchester Central Mosque Timings</p>
                                 </div>
+                                
+                                <div class="p-4 space-y-2 text-sm">
+                                    <div class="flex justify-between items-center p-2.5 rounded-lg bg-gray-50 border border-gray-200">
+                                        <span class="font-extrabold text-mosqueDarkGreen">Fajr</span>
+                                        <div class="text-right">
+                                            <span class="text-xs text-gray-500 block">Begins 4:35 AM</span>
+                                            <span class="font-black text-mosqueDarkGreen text-base">Jama'at: 6:00 AM</span>
+                                        </div>
+                                    </div>
 
-                                <svg class="w-16 h-14 sm:w-20 sm:h-16 text-white my-1" viewBox="0 0 100 80" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M 25 75 L 25 45 C 25 25, 75 25, 75 45 L 75 75" stroke-width="2"/>
-                                    <path d="M 35 45 C 35 20, 65 20, 65 45" stroke-width="2.5"/>
-                                    <path d="M 50 20 L 50 10" stroke-width="2"/>
-                                    <circle cx="50" cy="8" r="2.5" fill="currentColor"/>
-                                    <path d="M 15 75 L 15 25 L 12 25 L 12 18 L 15 18 L 15 8 L 18 3 L 21 8 L 21 18 L 24 18 L 24 25 L 21 25 L 21 75" stroke-width="2"/>
-                                    <path d="M 79 75 L 79 25 L 76 25 L 76 18 L 79 18 L 79 8 L 82 3 L 85 8 L 85 18 L 88 18 L 88 25 L 85 25 L 85 75" stroke-width="2"/>
-                                    <line x1="5" y1="75" x2="95" y2="75" stroke-width="3"/>
-                                </svg>
+                                    <div class="flex justify-between items-center p-2.5 rounded-lg bg-gray-50 border border-gray-200">
+                                        <span class="font-extrabold text-mosqueDarkGreen">Zuhr</span>
+                                        <div class="text-right">
+                                            <span class="text-xs text-gray-500 block">Begins 1:05 PM</span>
+                                            <span class="font-black text-mosqueDarkGreen text-base">Jama'at: 1:30 PM</span>
+                                        </div>
+                                    </div>
 
-                                <div class="text-[9px] sm:text-[10px] font-black tracking-tighter uppercase leading-tight text-white mb-1">
-                                    MANCHESTER CENTRAL<br/>
-                                    <span class="text-amber-300 font-extrabold text-[11px]">MOSQUE</span>
+                                    <div class="flex justify-between items-center p-2.5 rounded-lg prayer-card-active border-2">
+                                        <div>
+                                            <span class="font-extrabold">Asr</span>
+                                            <span class="bg-amber-300 text-mosqueDarkGreen text-[10px] font-extrabold px-1.5 py-0.5 rounded ml-2">NEXT</span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-xs text-amber-200 block">Begins 5:26 PM</span>
+                                            <span class="font-black text-base text-amber-300">Jama'at: 5:45 PM</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex justify-between items-center p-2.5 rounded-lg bg-gray-50 border border-gray-200">
+                                        <span class="font-extrabold text-mosqueDarkGreen">Maghrib</span>
+                                        <div class="text-right">
+                                            <span class="text-xs text-gray-500 block">Sunset 7:30 PM</span>
+                                            <span class="font-black text-mosqueDarkGreen text-base">Jama'at: 7:33 PM</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex justify-between items-center p-2.5 rounded-lg bg-gray-50 border border-gray-200">
+                                        <span class="font-extrabold text-mosqueDarkGreen">Isha</span>
+                                        <div class="text-right">
+                                            <span class="text-xs text-gray-500 block">Begins 9:10 PM</span>
+                                            <span class="font-black text-mosqueDarkGreen text-base">Jama'at: 9:30 PM</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-amber-50 border border-amber-300 text-mosqueDarkGreen p-2.5 rounded-lg text-center text-xs font-bold mt-2">
+                                        <i class="fa-solid fa-circle-info text-mosqueDarkGreen mr-1"></i>
+                                        Jumu'ah: 1st Jama'at 1:30 PM &nbsp;|&nbsp; 2nd Jama'at 2:30 PM
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="md:col-span-4 text-center md:text-right flex flex-col justify-center">
-                        <div class="font-arabic text-2xl sm:text-3xl font-bold text-mosqueDarkGreen leading-tight" dir="rtl">
-                            مرکزی جامع مسجد مانچسٹر وکٹوریہ پارک
+                    </div>
+                </div>
+            </section>
+
+            <!-- ANNOUNCEMENT BANNER -->
+            <section class="bg-mosqueGold text-mosqueDarkGreen py-4 px-4 font-bold shadow-md">
+                <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3 text-sm sm:text-base">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bullhorn text-xl animate-bounce"></i>
+                        <span><strong>Announcements:</strong> GTSS Sacred Sciences & Evening Madrasa Enrolment Open.</span>
+                    </div>
+                    <button onclick="switchTab('services')" class="underline font-black hover:text-black">Learn More & Register →</button>
+                </div>
+            </section>
+
+            <!-- OMOF FEATURE SECTION -->
+            <section class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="bg-mosqueLightBg border-2 border-mosqueDarkGreen rounded-3xl p-6 sm:p-10 shadow-xl relative overflow-hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                            
+                            <div class="lg:col-span-7 space-y-4">
+                                <span class="text-xs font-extrabold tracking-widest text-mosqueGoldDark uppercase bg-amber-100 px-3 py-1 rounded">Flagship Development</span>
+                                <h2 class="text-3xl sm:text-4xl font-black text-mosqueDarkGreen">
+                                    OUR MASJID OUR FUTURE (OMOF)
+                                </h2>
+                                <h3 class="text-lg font-bold text-gray-700">
+                                    Community & Education Growth Expansion
+                                </h3>
+                                <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                                    We are enhancing facility space, youth educational classrooms, and ladies' accommodations while preserving the historic grand prayer hall.
+                                </p>
+                                
+                                <div class="space-y-2 pt-2">
+                                    <div class="flex justify-between text-xs font-bold">
+                                        <span class="text-mosqueDarkGreen">Target Raised: £450,000</span>
+                                        <span class="text-mosqueGoldDark">Goal: £1,000,000</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 h-4 rounded-full overflow-hidden border border-gray-300">
+                                        <div class="bg-mosqueGreen h-full rounded-full" style="width: 45%;"></div>
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-wrap gap-4 pt-4">
+                                    <button onclick="switchTab('donate')" class="bg-mosqueDarkGreen hover:bg-emerald-900 text-white font-extrabold px-6 py-3 rounded-lg shadow-md transition">
+                                        Pledge Donation Now
+                                    </button>
+                                    <button onclick="switchTab('omof')" class="border border-mosqueDarkGreen text-mosqueDarkGreen font-bold px-6 py-3 rounded-lg hover:bg-mosqueDarkGreen hover:text-white transition">
+                                        Read Project Details
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="lg:col-span-5 flex justify-center">
+                                <div class="w-full h-64 sm:h-80 bg-mosqueDarkGreen rounded-2xl flex flex-col items-center justify-center p-6 text-white text-center shadow-lg border-4 border-mosqueGold">
+                                    <i class="fa-solid fa-building-columns text-5xl text-amber-300 mb-3"></i>
+                                    <h4 class="text-xl font-black">Build For Generations To Come</h4>
+                                    <p class="text-xs text-gray-200 mt-2">"Whoever builds a mosque for Allah, Allah will build for him a house like it in Paradise."</p>
+                                    <span class="text-xs font-bold text-amber-300 mt-3 block">— Sahih al-Bukhari 450</span>
+                                </div>
+                            </div>
+
                         </div>
-                        <h1 class="text-lg sm:text-xl font-black text-mosqueDarkGreen tracking-tight leading-tight mt-1">
-                            MANCHESTER
-                        </h1>
-                        <h2 class="text-base sm:text-lg font-extrabold text-mosqueDarkGreen tracking-tight leading-none">
-                            CENTRAL MOSQUE
-                        </h2>
-                        <p class="text-xs font-bold text-mosqueDarkGreen tracking-normal mt-0.5">
-                            & ISLAMIC CULTURAL CENTRE
-                        </p>
-                        <p class="text-xs sm:text-sm font-black text-mosqueDarkGreen tracking-widest uppercase mt-1 border-t border-mosqueDarkGreen pt-0.5 inline-block">
-                            JAMIAT-UL-MUSLIMIN
-                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE 2: PRAYER TIMETABLE -->
+        <div id="page-timetable" class="tab-page">
+            <div class="max-w-6xl mx-auto px-2 sm:px-4 py-8">
+                
+                <div class="flex justify-between items-center mb-4 no-print">
+                    <h2 class="text-2xl font-black text-mosqueDarkGreen">Monthly Prayer Timetable</h2>
+                    <button onclick="window.print()" class="bg-mosqueGold text-mosqueDarkGreen font-bold px-4 py-2 rounded-lg text-sm flex items-center gap-2 hover:bg-yellow-500 shadow">
+                        <i class="fa-solid fa-print"></i>
+                        <span>Print Schedule</span>
+                    </button>
+                </div>
+
+                <div class="print-container bg-white shadow-2xl rounded-none w-full overflow-hidden border border-gray-300">
+                    
+                    <!-- GOLDEN HEADER SECTION -->
+                    <div class="bg-[#d3aa36] border-t-4 border-b-4 border-mosqueDarkGreen p-3 sm:p-4 text-black relative">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+                            
+                            <div class="md:col-span-4 text-center md:text-left">
+                                <h2 class="text-3xl sm:text-4xl font-black tracking-tight text-mosqueDarkGreen uppercase leading-none">
+                                    PRAYER
+                                </h2>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-mosqueDarkGreen uppercase mt-0.5">
+                                    TIMETABLE
+                                </h3>
+                                <div class="mt-1 flex items-center justify-center md:justify-start">
+                                    <span class="bg-mosqueDarkGreen text-white font-bold text-sm sm:text-base px-3 py-0.5 tracking-wider uppercase inline-block">
+                                        SEPTEMBER 2026
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- MOSQUE LOGO -->
+                            <div class="md:col-span-4 flex justify-center my-1 md:my-0">
+                                <div class="w-28 h-32 sm:w-32 sm:h-36 bg-mosqueDarkGreen rounded-t-full border-2 border-mosqueDarkGreen flex flex-col items-center justify-between p-1.5 text-center text-white shadow-lg relative">
+                                    <div class="text-[8px] sm:text-[9px] leading-tight font-medium text-amber-200 uppercase mt-1">
+                                        Charity Registration<br/>No: 1081649
+                                    </div>
+                                    <i class="fa-solid fa-mosque text-3xl text-amber-300"></i>
+                                    <div class="text-[9px] sm:text-[10px] font-black tracking-tighter uppercase leading-tight text-white mb-1">
+                                        MANCHESTER CENTRAL<br/>
+                                        <span class="text-amber-300 font-extrabold text-[11px]">MOSQUE</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-4 text-center md:text-right flex flex-col justify-center">
+                                <div class="font-arabic text-2xl sm:text-3xl font-bold text-mosqueDarkGreen leading-tight" dir="rtl">
+                                    مرکزی جامع مسجد مانچسٹر وکٹوریہ پارک
+                                </div>
+                                <h1 class="text-lg sm:text-xl font-black text-mosqueDarkGreen tracking-tight leading-tight mt-1">
+                                    MANCHESTER CENTRAL MOSQUE
+                                </h1>
+                                <p class="text-xs font-bold text-mosqueDarkGreen mt-0.5">
+                                    & ISLAMIC CULTURAL CENTRE
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 pt-2 border-t border-mosqueDarkGreen/40 text-center text-xs sm:text-sm font-bold text-mosqueDarkGreen">
+                            20 Upper Park Road, Victoria Park, Manchester, M14 5RU &nbsp;|&nbsp; TEL: 0161 224 4119
+                        </div>
+                    </div>
+
+                    <!-- TABLE -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-center border-collapse text-xs sm:text-sm font-semibold timetable-table">
+                            <thead>
+                                <tr class="bg-mosqueDarkGreen text-white text-xs sm:text-sm">
+                                    <th colspan="3" class="py-1 px-1 border-r border-white/30 font-bold uppercase">Date / Calendar</th>
+                                    <th colspan="7" class="py-1 px-1 border-r border-white/30 font-bold bg-mosqueDarkGreen">PRAYER START TIMES</th>
+                                    <th colspan="5" class="py-1 px-1 font-bold bg-mosqueDarkGreen">JAMA'AT TIMES</th>
+                                </tr>
+                                <tr class="bg-mosqueDarkGreen text-amber-300 text-[10px] sm:text-xs">
+                                    <th class="py-1 px-0.5 w-7 text-white">SEP</th>
+                                    <th class="py-1 px-0.5 w-9 text-white">DAY</th>
+                                    <th class="py-1 px-0.5 w-16 text-white">HIJRI</th>
+                                    <th class="py-1 px-1">FAJR</th>
+                                    <th class="py-1 px-1">SUNRISE</th>
+                                    <th class="py-1 px-1">ZAWAL</th>
+                                    <th class="py-1 px-1">ZUHR</th>
+                                    <th class="py-1 px-1">ASR</th>
+                                    <th class="py-1 px-1">SUNSET</th>
+                                    <th class="py-1 px-1 border-r-2 border-mosqueGold">ISHA</th>
+                                    <th class="py-1 px-1 text-amber-300">FAJR</th>
+                                    <th class="py-1 px-1 text-amber-300">ZUHR</th>
+                                    <th class="py-1 px-1 text-amber-300">ASR</th>
+                                    <th class="py-1 px-1 text-amber-300">MAGHRIB</th>
+                                    <th class="py-1 px-1 text-amber-300">ISHA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="timetableBody" class="text-black text-xs sm:text-sm font-semibold">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- FOOTER -->
+                    <div class="bg-mosqueGold border-t-2 border-mosqueDarkGreen text-mosqueDarkGreen font-bold p-3 text-xs sm:text-sm text-center">
+                        1st Jumah prayer at 1.15pm (Jama'at 1.30pm) &nbsp;|&nbsp; 2nd prayer at 2.15pm (Jama'at 2.30pm)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3: OMOF PROJECT -->
+        <div id="page-omof" class="tab-page">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="max-w-3xl mx-auto text-center mb-10">
+                    <span class="bg-amber-100 text-mosqueGoldDark text-xs font-black px-3 py-1 rounded uppercase">Flagship Development</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-mosqueDarkGreen mt-2">OUR MASJID OUR FUTURE (OMOF)</h2>
+                    <p class="text-gray-600 mt-2">Expansion and modernization project for Manchester Central Mosque Victoria Park.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                    <div class="bg-white p-6 rounded-xl border-t-4 border-mosqueDarkGreen shadow">
+                        <i class="fa-solid fa-users text-3xl text-mosqueDarkGreen mb-3"></i>
+                        <h3 class="font-extrabold text-lg">Increased Capacity</h3>
+                        <p class="text-xs text-gray-600 mt-2">Expanded prayer halls for Jumu'ah and Eid congregation to accommodate growing attendance comfortably.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border-t-4 border-mosqueGold shadow">
+                        <i class="fa-solid fa-graduation-cap text-3xl text-mosqueGoldDark mb-3"></i>
+                        <h3 class="font-extrabold text-lg">Education Complex</h3>
+                        <p class="text-xs text-gray-600 mt-2">Dedicated classrooms for GTSS Diploma courses and youth evening madrasa education.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl border-t-4 border-mosqueDarkGreen shadow">
+                        <i class="fa-solid fa-venus text-3xl text-mosqueDarkGreen mb-3"></i>
+                        <h3 class="font-extrabold text-lg">Ladies Facilities</h3>
+                        <p class="text-xs text-gray-600 mt-2">Dedicated, high-quality, fully accessible entrance, prayer hall, and wudhu facilities for sisters.</p>
                     </div>
                 </div>
 
-                <div class="mt-3 pt-2 border-t border-mosqueDarkGreen/40 text-center text-xs sm:text-sm font-bold text-mosqueDarkGreen">
-                    20 Upper Park Road, Victoria Park, Manchester, M14 5RU &nbsp;|&nbsp; 
-                    <span class="inline-block">TEL: 0161 224 4119</span> &nbsp;|&nbsp; 
-                    <span class="inline-block">FAX: 0161 248 0283</span>
+                <div class="bg-mosqueDarkGreen text-white p-8 rounded-2xl text-center">
+                    <h3 class="text-2xl font-black text-amber-300">Support the £1,000,000 Development Fund</h3>
+                    <p class="text-sm max-w-2xl mx-auto mt-2 text-gray-200">Set up a monthly standing order or make a one-off Sadaqah Jariyah contribution today.</p>
+                    <button onclick="switchTab('donate')" class="mt-6 bg-mosqueGold hover:bg-yellow-500 text-mosqueDarkGreen font-black px-8 py-3 rounded-lg shadow-lg">
+                        Donate To OMOF Project
+                    </button>
                 </div>
             </div>
+        </div>
 
-            <!-- PRAYER TABLE -->
-            <div class="overflow-x-auto">
-                <table class="w-full text-center border-collapse text-xs sm:text-sm font-semibold timetable-table">
-                    <thead>
-                        <tr class="bg-mosqueDarkGreen text-white text-xs sm:text-sm">
-                            <th colspan="3" class="py-1 px-1 border-r border-white/30 font-bold uppercase">Date / Calendar</th>
-                            <th colspan="7" class="py-1 px-1 border-r border-white/30 font-bold bg-mosqueDarkGreen">
-                                <span class="text-amber-300 font-arabic text-base mr-2">ابتداءالاوقت</span>
-                                PRAYER START TIMES
-                            </th>
-                            <th colspan="5" class="py-1 px-1 font-bold bg-mosqueDarkGreen">
-                                <span class="text-amber-300 font-arabic text-base mr-2">اوقات جماعت</span>
-                                JAMA'AT TIMES
-                            </th>
-                        </tr>
+        <!-- PAGE 4: SERVICES -->
+        <div id="page-services" class="tab-page">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl font-black text-mosqueDarkGreen">Services & Religious Support</h2>
+                    <p class="text-gray-600 mt-1">Providing spiritual, educational, and welfare services to Manchester.</p>
+                </div>
 
-                        <tr class="bg-mosqueDarkGreen text-amber-300 text-[10px] sm:text-xs">
-                            <th class="py-1 px-0.5 w-7 bg-mosqueDarkGreen text-white">
-                                SEP<br/><span class="font-arabic text-xs font-normal">ستمبر</span>
-                            </th>
-                            <th class="py-1 px-0.5 w-9 bg-mosqueDarkGreen text-white">
-                                DAY<br/><span class="font-arabic text-xs font-normal">دن</span>
-                            </th>
-                            <th class="py-1 px-0.5 w-16 bg-mosqueDarkGreen text-white text-[9px] sm:text-[10px]">
-                                RABI UL AWWAL<br/><span class="font-arabic text-xs font-normal">ربیع الأول</span>
-                            </th>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fa-solid fa-hand-holding-heart text-2xl text-red-700"></i>
+                            <h3 class="text-xl font-bold text-mosqueDarkGreen">24/7 Funeral Service</h3>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">Complete Ghusl, Kafan, Janazah, and burial transport coordination available 24 hours a day, 7 days a week.</p>
+                        <a href="tel:07578359741" class="bg-red-700 text-white font-extrabold text-xs px-4 py-2 rounded inline-block">Call Hotline: 07578 359741</a>
+                    </div>
 
-                            <th class="py-1 px-1">FAJR<br/><span class="font-arabic text-xs font-normal text-white">فجر</span></th>
-                            <th class="py-1 px-1">SUNRISE<br/><span class="font-arabic text-xs font-normal text-white">طلوع</span></th>
-                            <th class="py-1 px-1">ZAWAL<br/><span class="font-arabic text-xs font-normal text-white">زوال</span></th>
-                            <th class="py-1 px-1">ZUHR<br/><span class="font-arabic text-xs font-normal text-white">ظہر</span></th>
-                            <th class="py-1 px-1">ASR<br/><span class="font-arabic text-xs font-normal text-white">عصر</span></th>
-                            <th class="py-1 px-1">SUNSET<br/><span class="font-arabic text-xs font-normal text-white">غروب</span></th>
-                            <th class="py-1 px-1 border-r-2 border-mosqueGold">ISHA<br/><span class="font-arabic text-xs font-normal text-white">عشاء</span></th>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fa-solid fa-file-contract text-2xl text-mosqueDarkGreen"></i>
+                            <h3 class="text-xl font-bold text-mosqueDarkGreen">Nikah & Marriage Ceremonies</h3>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed mb-4">Official Islamic Nikah solemnization with official MCM certificate issuance and spiritual counseling.</p>
+                        <button onclick="switchTab('contact')" class="bg-mosqueDarkGreen text-white font-bold text-xs px-4 py-2 rounded">Inquire for Booking</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">FAJR<br/><span class="font-arabic text-xs font-normal text-white">فجر</span></th>
-                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">ZUHR<br/><span class="font-arabic text-xs font-normal text-white">ظہر</span></th>
-                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">ASR<br/><span class="font-arabic text-xs font-normal text-white">عصر</span></th>
-                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">MAGHRIB<br/><span class="font-arabic text-xs font-normal text-white">مغرب</span></th>
-                            <th class="py-1 px-1 bg-mosqueDarkGreen text-amber-300">ISHA<br/><span class="font-arabic text-xs font-normal text-white">عشاء</span></th>
-                        </tr>
-                    </thead>
+        <!-- PAGE 5: DONATIONS -->
+        <div id="page-donate" class="tab-page">
+            <div class="max-w-4xl mx-auto px-4 py-12">
+                <div class="bg-white p-8 rounded-2xl shadow-xl border-2 border-mosqueGold">
+                    <h2 class="text-3xl font-black text-mosqueDarkGreen text-center mb-2">Online Donations</h2>
+                    <p class="text-center text-xs text-gray-600 mb-6">Manchester Central Mosque Charity Reg No: 1081649</p>
 
-                    <tbody id="timetableBody" class="text-black text-xs sm:text-sm font-semibold">
-                    </tbody>
-                </table>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-1">Select Purpose</label>
+                            <select class="w-full p-3 border rounded-lg font-bold text-sm">
+                                <option>Lillah (Mosque Running Costs)</option>
+                                <option>Zakat (Eligible Families)</option>
+                                <option>Sadaqah (General Relief)</option>
+                                <option>OMOF Growth Expansion Fund</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-1">Donation Amount (£)</label>
+                            <div class="grid grid-cols-4 gap-2 mb-2">
+                                <button onclick="setDonateAmt(20)" class="py-2 border-2 border-mosqueDarkGreen rounded font-bold hover:bg-mosqueDarkGreen hover:text-white">£20</button>
+                                <button onclick="setDonateAmt(50)" class="py-2 border-2 border-mosqueDarkGreen rounded font-bold hover:bg-mosqueDarkGreen hover:text-white">£50</button>
+                                <button onclick="setDonateAmt(100)" class="py-2 border-2 border-mosqueDarkGreen rounded font-bold hover:bg-mosqueDarkGreen hover:text-white">£100</button>
+                                <button onclick="setDonateAmt(250)" class="py-2 border-2 border-mosqueDarkGreen rounded font-bold hover:bg-mosqueDarkGreen hover:text-white">£250</button>
+                            </div>
+                            <input type="number" id="customDonateInput" placeholder="Enter custom amount" class="w-full p-3 border rounded-lg font-bold">
+                        </div>
+
+                        <button onclick="alert('Connecting to payment processor...')" class="w-full bg-mosqueGold hover:bg-yellow-500 text-mosqueDarkGreen font-black py-4 rounded-xl shadow-lg uppercase tracking-wider text-base">
+                            Proceed To Secure Payment
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 6: CONTACT -->
+        <div id="page-contact" class="tab-page">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-4">
+                        <h2 class="text-3xl font-black text-mosqueDarkGreen">Get In Touch</h2>
+                        <p class="text-xs text-gray-600">Manchester Central Mosque & Islamic Cultural Centre (Victoria Park)</p>
+                        
+                        <div class="text-xs space-y-2 text-gray-700 font-medium">
+                            <p><i class="fa-solid fa-location-dot text-mosqueGoldDark mr-2"></i> 20 Upper Park Rd, Victoria Park, Manchester M14 5RU</p>
+                            <p><i class="fa-solid fa-phone text-mosqueGoldDark mr-2"></i> Office: 0161 224 4119</p>
+                            <p><i class="fa-solid fa-phone-flip text-red-700 mr-2"></i> Funeral (24/7): 07578 359741</p>
+                            <p><i class="fa-solid fa-envelope text-mosqueGoldDark mr-2"></i> Email: info@manchestercentralmosque.org</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-2xl border shadow">
+                        <h3 class="font-bold text-lg mb-4 text-mosqueDarkGreen">Send A Message</h3>
+                        <form onsubmit="event.preventDefault(); alert('Message sent!');" class="space-y-3">
+                            <input type="text" placeholder="Your Name" class="w-full p-2.5 border rounded text-xs" required>
+                            <input type="email" placeholder="Your Email Address" class="w-full p-2.5 border rounded text-xs" required>
+                            <textarea placeholder="Message details..." rows="4" class="w-full p-2.5 border rounded text-xs" required></textarea>
+                            <button type="submit" class="bg-mosqueDarkGreen text-white font-bold text-xs px-6 py-2.5 rounded">Submit Inquiry</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-mosqueDarkGreen text-white border-t-8 border-mosqueGold pt-12 pb-6 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-xs sm:text-sm">
+            
+            <div class="space-y-3">
+                <h4 class="text-base font-black text-amber-300 uppercase tracking-wider">Manchester Central Mosque</h4>
+                <p class="text-gray-300 leading-relaxed">
+                    Registered Charity No: 1081649<br/>
+                    Jamiat-Ul-Muslimin Victoria Park
+                </p>
             </div>
 
-            <!-- FOOTER -->
-            <div class="bg-mosqueGold border-t-2 border-mosqueDarkGreen text-mosqueDarkGreen font-bold p-3 text-xs sm:text-sm leading-snug">
-                <div class="text-center font-extrabold text-sm sm:text-base border-b border-mosqueDarkGreen/30 pb-1.5 mb-2">
-                    1st Jumah prayer is at 1.15pm ( Jama'at at 1.30). &nbsp; 2nd prayer will be at 2.15 (Jama'at at 2.30pm)
-                </div>
+            <div class="space-y-2">
+                <h4 class="text-base font-black text-amber-300 uppercase tracking-wider">Navigation</h4>
+                <ul class="space-y-1">
+                    <li><button onclick="switchTab('timetable')" class="hover:underline">Monthly Prayer Timetable</button></li>
+                    <li><button onclick="switchTab('omof')" class="hover:underline">Our Masjid Our Future</button></li>
+                    <li><button onclick="switchTab('services')" class="hover:underline">Funeral Services (24/7)</button></li>
+                    <li><button onclick="switchTab('donate')" class="hover:underline">Donate Online</button></li>
+                </ul>
+            </div>
 
-                <div class="text-center mb-1">
-                    Need any more info , pls contact <a href="mailto:religious-affairs@manchestercentralmosque.org" class="underline hover:text-black">religious-affairs@manchestercentralmosque.org</a>
-                </div>
+            <div class="space-y-2">
+                <h4 class="text-base font-black text-amber-300 uppercase tracking-wider">Key Contacts</h4>
+                <p class="text-gray-300">
+                    <strong>General Enquiries:</strong><br/>
+                    <a href="mailto:info@manchestercentralmosque.org" class="underline">info@manchestercentralmosque.org</a>
+                </p>
+            </div>
 
-                <div class="bg-mosqueDarkGreen text-white text-center py-1.5 px-2 rounded my-1 text-sm sm:text-base font-black tracking-wide">
-                    Funeral Service ( 24 hours) Mob: <a href="tel:07578359741" class="text-amber-300 underline">07578 359741</a>
-                </div>
-
-                <div class="flex flex-wrap justify-between items-center text-[11px] sm:text-xs pt-1 px-2 font-bold">
-                    <span>web: <a href="https://www.manchestercentralmosque.org" target="_blank" class="underline">www.manchestercentralmosque.org</a></span>
-                    <span>email: <a href="mailto:info@manchestercentralmosque.org" class="underline">info@manchestercentralmosque.org</a></span>
+            <div class="space-y-2">
+                <h4 class="text-base font-black text-amber-300 uppercase tracking-wider">24/7 Emergency</h4>
+                <div class="bg-red-800 p-3 rounded-lg text-white font-bold">
+                    <p class="text-xs">Funeral Hotline:</p>
+                    <a href="tel:07578359741" class="text-lg font-black text-amber-300 underline block mt-0.5">07578 359741</a>
                 </div>
             </div>
 
         </div>
-    </main>
+
+        <div class="max-w-7xl mx-auto px-4 border-t border-emerald-900 pt-6 text-center text-xs text-gray-400">
+            © 2026 Manchester Central Mosque & Islamic Cultural Centre. All Rights Reserved.
+        </div>
+    </footer>
 
     <script>
         const septemberData = [
@@ -279,84 +589,66 @@
             { sep: 9, day: "WED", hijri: 27, fajrBeg: "4:25", sunrise: "6:32", zawal: "12:04", zuhrBeg: "1:06", asrBeg: "5:34", sunset: "7:40", ishaBeg: "9:22", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:43", ishaJam: "9:45" },
             { sep: 10, day: "THU", hijri: 28, fajrBeg: "4:27", sunrise: "6:34", zawal: "12:03", zuhrBeg: "1:06", asrBeg: "5:32", sunset: "7:37", ishaBeg: "9:19", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:40", ishaJam: "9:45" },
             { sep: 11, day: "FRI", hijri: 29, fajrBeg: "4:30", sunrise: "6:35", zawal: "12:04", zuhrBeg: "1:06", asrBeg: "5:30", sunset: "7:35", ishaBeg: "9:16", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:38", ishaJam: "9:30", isFriday: true },
-            { sep: 12, day: "SAT", hijri: 30, fajrBeg: "4:32", sunrise: "6:37", zawal: "12:03", zuhrBeg: "1:05", asrBeg: "5:28", sunset: "7:32", ishaBeg: "9:13", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:35", ishaJam: "9:30" },
-            
-            { isDivider: true, text: "Rabī' al-Ākhir (ربيع الآخر)" },
-
-            { sep: 13, day: "SUN", hijri: 1, fajrBeg: "4:35", sunrise: "6:39", zawal: "12:04", zuhrBeg: "1:05", asrBeg: "5:26", sunset: "7:30", ishaBeg: "9:10", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:33", ishaJam: "9:30" },
-            { sep: 14, day: "MON", hijri: 2, fajrBeg: "4:37", sunrise: "6:41", zawal: "12:03", zuhrBeg: "1:05", asrBeg: "5:24", sunset: "7:27", ishaBeg: "9:07", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:30", ishaJam: "9:30" },
-            { sep: 15, day: "TUE", hijri: 3, fajrBeg: "4:39", sunrise: "6:42", zawal: "12:03", zuhrBeg: "1:04", asrBeg: "5:22", sunset: "7:25", ishaBeg: "9:04", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:28", ishaJam: "9:30" },
-            { sep: 16, day: "WED", hijri: 4, fajrBeg: "4:41", sunrise: "6:44", zawal: "12:03", zuhrBeg: "1:04", asrBeg: "5:20", sunset: "7:22", ishaBeg: "9:02", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:25", ishaJam: "9:30" },
-            { sep: 17, day: "THU", hijri: 5, fajrBeg: "4:44", sunrise: "6:46", zawal: "12:03", zuhrBeg: "1:04", asrBeg: "5:18", sunset: "7:20", ishaBeg: "8:59", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:23", ishaJam: "9:30" },
-            { sep: 18, day: "FRI", hijri: 6, fajrBeg: "4:46", sunrise: "6:48", zawal: "12:03", zuhrBeg: "1:03", asrBeg: "5:16", sunset: "7:18", ishaBeg: "8:56", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:21", ishaJam: "9:15", isFriday: true },
-            { sep: 19, day: "SAT", hijri: 7, fajrBeg: "4:48", sunrise: "6:49", zawal: "12:03", zuhrBeg: "1:03", asrBeg: "5:14", sunset: "7:15", ishaBeg: "8:53", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:18", ishaJam: "9:15" },
-            { sep: 20, day: "SUN", hijri: 8, fajrBeg: "4:50", sunrise: "6:51", zawal: "12:03", zuhrBeg: "1:02", asrBeg: "5:12", sunset: "7:13", ishaBeg: "8:51", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:16", ishaJam: "9:15" },
-            { sep: 21, day: "MON", hijri: 9, fajrBeg: "4:52", sunrise: "6:53", zawal: "12:02", zuhrBeg: "1:02", asrBeg: "5:10", sunset: "7:10", ishaBeg: "8:48", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:13", ishaJam: "9:15" },
-            { sep: 22, day: "TUE", hijri: 10, fajrBeg: "4:55", sunrise: "6:55", zawal: "12:03", zuhrBeg: "1:02", asrBeg: "5:08", sunset: "7:08", ishaBeg: "8:45", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:11", ishaJam: "9:15" },
-            { sep: 23, day: "WED", hijri: 11, fajrBeg: "4:57", sunrise: "6:56", zawal: "12:02", zuhrBeg: "1:01", asrBeg: "5:05", sunset: "7:05", ishaBeg: "8:43", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:08", ishaJam: "9:15" },
-            { sep: 24, day: "THU", hijri: 12, fajrBeg: "4:59", sunrise: "6:58", zawal: "12:02", zuhrBeg: "1:01", asrBeg: "5:03", sunset: "7:03", ishaBeg: "8:40", fajrJam: "6:15", zuhrJam: "1:30", asrJam: "5:30", maghribJam: "7:06", ishaJam: "9:15" },
-            { sep: 25, day: "FRI", hijri: 13, fajrBeg: "5:01", sunrise: "7:00", zawal: "12:02", zuhrBeg: "1:01", asrBeg: "5:01", sunset: "7:00", ishaBeg: "8:37", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "7:03", ishaJam: "9:00", isFriday: true },
-            { sep: 26, day: "SAT", hijri: 14, fajrBeg: "5:03", sunrise: "7:02", zawal: "12:02", zuhrBeg: "1:00", asrBeg: "4:59", sunset: "6:58", ishaBeg: "8:35", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "7:01", ishaJam: "9:00" },
-            { sep: 27, day: "SUN", hijri: 15, fajrBeg: "5:05", sunrise: "7:03", zawal: "12:02", zuhrBeg: "1:00", asrBeg: "4:57", sunset: "6:56", ishaBeg: "8:32", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "6:59", ishaJam: "9:00" },
-            { sep: 28, day: "MON", hijri: 16, fajrBeg: "5:07", sunrise: "7:05", zawal: "12:01", zuhrBeg: "1:00", asrBeg: "4:55", sunset: "6:53", ishaBeg: "8:29", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "6:56", ishaJam: "9:00" },
-            { sep: 29, day: "TUE", hijri: 17, fajrBeg: "5:09", sunrise: "7:07", zawal: "12:01", zuhrBeg: "12:59", asrBeg: "4:53", sunset: "6:51", ishaBeg: "8:27", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "6:54", ishaJam: "9:00" },
-            { sep: 30, day: "WED", hijri: 18, fajrBeg: "5:11", sunrise: "7:09", zawal: "12:01", zuhrBeg: "12:59", asrBeg: "4:51", sunset: "6:48", ishaBeg: "8:24", fajrJam: "6:30", zuhrJam: "1:30", asrJam: "5:15", maghribJam: "6:51", ishaJam: "9:00" }
+            { sep: 12, day: "SAT", hijri: 30, fajrBeg: "4:32", sunrise: "6:37", zawal: "12:03", zuhrBeg: "1:05", asrBeg: "5:28", sunset: "7:32", ishaBeg: "9:13", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:35", ishaJam: "9:30" }
         ];
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-page').forEach(page => page.classList.remove('active-page'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-amber-300', 'border-b-2', 'border-amber-300');
+            });
+
+            const activePage = document.getElementById(`page-${tabId}`);
+            if (activePage) activePage.classList.add('active-page');
+
+            const activeBtn = document.getElementById(`nav-${tabId}`);
+            if (activeBtn) activeBtn.classList.add('text-amber-300', 'border-b-2', 'border-amber-300');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        function setDonateAmt(amt) {
+            document.getElementById('customDonateInput').value = amt;
+        }
 
         function renderTable() {
             const tbody = document.getElementById('timetableBody');
             tbody.innerHTML = '';
 
             septemberData.forEach((row) => {
-                if (row.isDivider) {
-                    const tr = document.createElement('tr');
-                    tr.className = 'bg-[#d3aa36] text-mosqueDarkGreen font-bold py-1';
-                    tr.innerHTML = `
-                        <td colspan="15" class="py-1 px-2 text-center text-xs sm:text-sm font-black border-y border-black uppercase tracking-wider">
-                            ${row.text}
-                        </td>
-                    `;
-                    tbody.appendChild(tr);
-                    return;
-                }
-
                 const tr = document.createElement('tr');
-                
-                if (row.isFriday) {
-                    tr.className = 'bg-[#00502B] text-white font-bold hover:bg-emerald-900 transition-colors';
-                } else {
-                    tr.className = 'bg-white hover:bg-yellow-50 text-black transition-colors';
-                }
-
-                const bgStart = row.isFriday ? 'bg-[#00502B] text-white' : 'bg-[#e6efe9] text-black';
-                const bgJam = row.isFriday ? 'bg-[#00381e] text-amber-300' : 'bg-[#e6efe9] text-black';
-                const dayColor = row.isFriday ? 'text-amber-300 font-black' : 'text-black';
+                tr.className = row.isFriday ? 'bg-[#00502B] text-white font-bold' : 'bg-white text-black';
 
                 tr.innerHTML = `
-                    <td class="py-1 px-0.5 font-bold ${dayColor}">${row.sep}</td>
-                    <td class="py-1 px-0.5 font-bold ${dayColor}">${row.day}</td>
-                    <td class="py-1 px-0.5 font-bold ${dayColor}">${row.hijri}</td>
-
-                    <td class="py-1 px-0.5 ${bgStart}">${row.fajrBeg}</td>
-                    <td class="py-1 px-0.5 ${bgStart}">${row.sunrise}</td>
-                    <td class="py-1 px-0.5 ${bgStart}">${row.zawal}</td>
-                    <td class="py-1 px-0.5 ${bgStart}">${row.zuhrBeg}</td>
-                    <td class="py-1 px-0.5 ${bgStart}">${row.asrBeg}</td>
-                    <td class="py-1 px-0.5 ${bgStart}">${row.sunset}</td>
-                    <td class="py-1 px-0.5 ${bgStart} border-r-2 border-mosqueGold">${row.ishaBeg}</td>
-
-                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.fajrJam}</td>
-                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.zuhrJam}</td>
-                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.asrJam}</td>
-                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.maghribJam}</td>
-                    <td class="py-1 px-0.5 ${bgJam} font-bold">${row.ishaJam}</td>
+                    <td class="py-1 px-0.5 font-bold">${row.sep}</td>
+                    <td class="py-1 px-0.5 font-bold">${row.day}</td>
+                    <td class="py-1 px-0.5 font-bold">${row.hijri}</td>
+                    <td class="py-1 px-0.5">${row.fajrBeg}</td>
+                    <td class="py-1 px-0.5">${row.sunrise}</td>
+                    <td class="py-1 px-0.5">${row.zawal}</td>
+                    <td class="py-1 px-0.5">${row.zuhrBeg}</td>
+                    <td class="py-1 px-0.5">${row.asrBeg}</td>
+                    <td class="py-1 px-0.5">${row.sunset}</td>
+                    <td class="py-1 px-0.5 border-r-2 border-mosqueGold">${row.ishaBeg}</td>
+                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.fajrJam}</td>
+                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.zuhrJam}</td>
+                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.asrJam}</td>
+                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.maghribJam}</td>
+                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.ishaJam}</td>
                 `;
-
                 tbody.appendChild(tr);
             });
         }
 
-        document.addEventListener('DOMContentLoaded', renderTable);
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTable();
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('currentDateDisplay').textContent = new Date().toLocaleDateString('en-GB', dateOptions);
+        });
     </script>
 </body>
 </html>
