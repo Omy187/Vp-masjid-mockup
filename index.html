@@ -470,31 +470,37 @@
                     <h2 class="text-3xl font-black text-mosqueDarkGreen text-center mb-2">Online Donations</h2>
                     <p class="text-center text-xs text-gray-600 mb-6">Manchester Central Mosque Charity Reg No: 1081649</p>
 
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-bold uppercase mb-1">Select Purpose</label>
-                            <select class="w-full p-3 border rounded-lg font-bold text-sm">
-                                <option>Lillah (Mosque Running Costs)</option>
-                                <option>Zakat (Eligible Families)</option>
-                                <option>Sadaqah (General Relief)</option>
-                                <option>OMOF Growth Expansion Fund</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold uppercase mb-1">Donation Amount (£)</label>
-                            <div class="grid grid-cols-4 gap-2 mb-2">
-                                <button onclick="setDonateAmt(20)" class="py-2 border-2 border-mosqueDarkGreen rounded font-bold hover:bg-mosqueDarkGreen hover:text-white">£20</button>
-                                <button onclick="setDonateAmt(50)" class="py-2 border-2 border-mosqueDarkGreen rounded font-bold hover:bg-mosqueDarkGreen hover:text-white">£50</button>
-                                <button onclick="setDonateAmt(100)" class="py-2 border-2 border-mosqueDarkGreen rounded font-bold hover:bg-mosqueDarkGreen hover:text-white">£100</button>
-                                <button onclick="setDonateAmt(250)" class="py-2 border-2 border-mosqueDarkGreen rounded font-bold hover:bg-mosqueDarkGreen hover:text-white">£250</button>
+                    <div class="space-y-6">
+                        <div class="bg-mosqueLightBg p-6 rounded-xl border border-emerald-200">
+                            <h3 class="font-extrabold text-mosqueDarkGreen text-lg mb-2"><i class="fa-solid fa-building-columns mr-2"></i> Bank Transfer Details</h3>
+                            <div class="text-sm space-y-1 text-gray-700 font-mono">
+                                <p><strong>Bank:</strong> Barclays Bank</p>
+                                <p><strong>Account Name:</strong> Manchester Central Mosque</p>
+                                <p><strong>Sort Code:</strong> 20-55-41</p>
+                                <p><strong>Account No:</strong> 10634128</p>
                             </div>
-                            <input type="number" id="customDonateInput" placeholder="Enter custom amount" class="w-full p-3 border rounded-lg font-bold">
                         </div>
 
-                        <button onclick="alert('Connecting to payment processor...')" class="w-full bg-mosqueGold hover:bg-yellow-500 text-mosqueDarkGreen font-black py-4 rounded-xl shadow-lg uppercase tracking-wider text-base">
-                            Proceed To Secure Payment
-                        </button>
+                        <form onsubmit="alert('Thank you for supporting Manchester Central Mosque!'); return false;" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Select Donation Cause</label>
+                                <select class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mosqueGreen focus:outline-none">
+                                    <option>General Mosque Maintenance</option>
+                                    <option>Our Masjid Our Future (OMOF) Project</option>
+                                    <option>Zakat Fund</option>
+                                    <option>Sadaqah / Charitable Welfare</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-gray-700 mb-1">Donation Amount (£)</label>
+                                <input type="number" placeholder="50" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mosqueGreen focus:outline-none" required>
+                            </div>
+
+                            <button type="submit" class="w-full bg-mosqueGold hover:bg-yellow-500 text-mosqueDarkGreen font-black py-3 rounded-lg shadow transition text-base">
+                                Proceed to Secure Payment
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -503,28 +509,26 @@
         <!-- PAGE 6: CONTACT -->
         <div id="page-contact" class="tab-page">
             <div class="max-w-7xl mx-auto px-4 py-12">
+                <div class="max-w-3xl mx-auto text-center mb-10">
+                    <h2 class="text-3xl font-black text-mosqueDarkGreen">Contact Us</h2>
+                    <p class="text-gray-600 mt-1">We are here to help the community. Reach out via phone or email.</p>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="space-y-4">
-                        <h2 class="text-3xl font-black text-mosqueDarkGreen">Get In Touch</h2>
-                        <p class="text-xs text-gray-600">Manchester Central Mosque & Islamic Cultural Centre (Victoria Park)</p>
-                        
-                        <div class="text-xs space-y-2 text-gray-700 font-medium">
-                            <p><i class="fa-solid fa-location-dot text-mosqueGoldDark mr-2"></i> 20 Upper Park Rd, Victoria Park, Manchester M14 5RU</p>
-                            <p><i class="fa-solid fa-phone text-mosqueGoldDark mr-2"></i> Office: 0161 224 4119</p>
-                            <p><i class="fa-solid fa-phone-flip text-red-700 mr-2"></i> Funeral (24/7): 07578 359741</p>
-                            <p><i class="fa-solid fa-envelope text-mosqueGoldDark mr-2"></i> Email: info@manchestercentralmosque.org</p>
-                        </div>
+                    <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow space-y-4">
+                        <h3 class="text-xl font-bold text-mosqueDarkGreen">Mosque Information</h3>
+                        <p class="text-sm"><i class="fa-solid fa-location-dot text-mosqueGold mr-2"></i> 20 Upper Park Rd, Victoria Park, Manchester, M14 5RU</p>
+                        <p class="text-sm"><i class="fa-solid fa-phone text-mosqueGold mr-2"></i> 0161 224 4119</p>
+                        <p class="text-sm"><i class="fa-solid fa-envelope text-mosqueGold mr-2"></i> info@manchestercentralmosque.org</p>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border shadow">
-                        <h3 class="font-bold text-lg mb-4 text-mosqueDarkGreen">Send A Message</h3>
-                        <form onsubmit="event.preventDefault(); alert('Message sent!');" class="space-y-3">
-                            <input type="text" placeholder="Your Name" class="w-full p-2.5 border rounded text-xs" required>
-                            <input type="email" placeholder="Your Email Address" class="w-full p-2.5 border rounded text-xs" required>
-                            <textarea placeholder="Message details..." rows="4" class="w-full p-2.5 border rounded text-xs" required></textarea>
-                            <button type="submit" class="bg-mosqueDarkGreen text-white font-bold text-xs px-6 py-2.5 rounded">Submit Inquiry</button>
-                        </form>
-                    </div>
+                    <form onsubmit="alert('Message Sent!'); return false;" class="bg-white p-6 rounded-2xl border border-gray-200 shadow space-y-4">
+                        <h3 class="text-xl font-bold text-mosqueDarkGreen">Send a Message</h3>
+                        <input type="text" placeholder="Your Name" class="w-full p-2.5 border border-gray-300 rounded-lg focus:outline-none" required>
+                        <input type="email" placeholder="Your Email" class="w-full p-2.5 border border-gray-300 rounded-lg focus:outline-none" required>
+                        <textarea placeholder="Your Message" rows="3" class="w-full p-2.5 border border-gray-300 rounded-lg focus:outline-none" required></textarea>
+                        <button type="submit" class="bg-mosqueDarkGreen text-white font-bold px-6 py-2.5 rounded-lg shadow">Send Message</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -532,123 +536,81 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-mosqueDarkGreen text-white border-t-8 border-mosqueGold pt-12 pb-6 no-print">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 text-xs sm:text-sm">
-            
-            <div class="space-y-3">
-                <h4 class="text-base font-black text-amber-300 uppercase tracking-wider">Manchester Central Mosque</h4>
-                <p class="text-gray-300 leading-relaxed">
-                    Registered Charity No: 1081649<br/>
-                    Jamiat-Ul-Muslimin Victoria Park
-                </p>
-            </div>
-
-            <div class="space-y-2">
-                <h4 class="text-base font-black text-amber-300 uppercase tracking-wider">Navigation</h4>
-                <ul class="space-y-1">
-                    <li><button onclick="switchTab('timetable')" class="hover:underline">Monthly Prayer Timetable</button></li>
-                    <li><button onclick="switchTab('omof')" class="hover:underline">Our Masjid Our Future</button></li>
-                    <li><button onclick="switchTab('services')" class="hover:underline">Funeral Services (24/7)</button></li>
-                    <li><button onclick="switchTab('donate')" class="hover:underline">Donate Online</button></li>
-                </ul>
-            </div>
-
-            <div class="space-y-2">
-                <h4 class="text-base font-black text-amber-300 uppercase tracking-wider">Key Contacts</h4>
-                <p class="text-gray-300">
-                    <strong>General Enquiries:</strong><br/>
-                    <a href="mailto:info@manchestercentralmosque.org" class="underline">info@manchestercentralmosque.org</a>
-                </p>
-            </div>
-
-            <div class="space-y-2">
-                <h4 class="text-base font-black text-amber-300 uppercase tracking-wider">24/7 Emergency</h4>
-                <div class="bg-red-800 p-3 rounded-lg text-white font-bold">
-                    <p class="text-xs">Funeral Hotline:</p>
-                    <a href="tel:07578359741" class="text-lg font-black text-amber-300 underline block mt-0.5">07578 359741</a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 border-t border-emerald-900 pt-6 text-center text-xs text-gray-400">
-            © 2026 Manchester Central Mosque & Islamic Cultural Centre. All Rights Reserved.
+    <footer class="bg-mosqueDarkGreen text-white py-8 border-t-4 border-mosqueGold no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-2">
+            <p class="font-bold text-amber-300">Manchester Central Mosque & Islamic Cultural Centre</p>
+            <p class="text-gray-300">20 Upper Park Road, Victoria Park, Manchester, M14 5RU | Registered Charity No: 1081649</p>
+            <p class="text-gray-400">© 2026 Manchester Central Mosque. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- JAVASCRIPT FOR INTERACTIVITY & TIMETABLE GENERATION -->
     <script>
-        const septemberData = [
-            { sep: 1, day: "TUE", hijri: 19, fajrBeg: "4:04", sunrise: "6:18", zawal: "12:03", zuhrBeg: "1:09", asrBeg: "5:49", sunset: "7:59", ishaBeg: "9:45", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "8:02", ishaJam: "10:15" },
-            { sep: 2, day: "WED", hijri: 20, fajrBeg: "4:07", sunrise: "6:20", zawal: "12:03", zuhrBeg: "1:09", asrBeg: "5:47", sunset: "7:56", ishaBeg: "9:42", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:59", ishaJam: "10:15" },
-            { sep: 3, day: "THU", hijri: 21, fajrBeg: "4:10", sunrise: "6:21", zawal: "12:03", zuhrBeg: "1:08", asrBeg: "5:45", sunset: "7:54", ishaBeg: "9:39", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:57", ishaJam: "10:15" },
-            { sep: 4, day: "FRI", hijri: 22, fajrBeg: "4:12", sunrise: "6:23", zawal: "12:03", zuhrBeg: "1:08", asrBeg: "5:43", sunset: "7:52", ishaBeg: "9:36", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:55", ishaJam: "9:45", isFriday: true },
-            { sep: 5, day: "SAT", hijri: 23, fajrBeg: "4:15", sunrise: "6:25", zawal: "12:03", zuhrBeg: "1:08", asrBeg: "5:42", sunset: "7:49", ishaBeg: "9:33", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:52", ishaJam: "9:45" },
-            { sep: 6, day: "SUN", hijri: 24, fajrBeg: "4:17", sunrise: "6:27", zawal: "12:03", zuhrBeg: "1:07", asrBeg: "5:40", sunset: "7:47", ishaBeg: "9:30", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:50", ishaJam: "9:45" },
-            { sep: 7, day: "MON", hijri: 25, fajrBeg: "4:20", sunrise: "6:28", zawal: "12:03", zuhrBeg: "1:07", asrBeg: "5:38", sunset: "7:44", ishaBeg: "9:27", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:47", ishaJam: "9:45" },
-            { sep: 8, day: "TUE", hijri: 26, fajrBeg: "4:22", sunrise: "6:30", zawal: "12:03", zuhrBeg: "1:07", asrBeg: "5:36", sunset: "7:42", ishaBeg: "9:24", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:45", ishaJam: "9:45" },
-            { sep: 9, day: "WED", hijri: 27, fajrBeg: "4:25", sunrise: "6:32", zawal: "12:04", zuhrBeg: "1:06", asrBeg: "5:34", sunset: "7:40", ishaBeg: "9:22", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:43", ishaJam: "9:45" },
-            { sep: 10, day: "THU", hijri: 28, fajrBeg: "4:27", sunrise: "6:34", zawal: "12:03", zuhrBeg: "1:06", asrBeg: "5:32", sunset: "7:37", ishaBeg: "9:19", fajrJam: "5:45", zuhrJam: "1:30", asrJam: "6:00", maghribJam: "7:40", ishaJam: "9:45" },
-            { sep: 11, day: "FRI", hijri: 29, fajrBeg: "4:30", sunrise: "6:35", zawal: "12:04", zuhrBeg: "1:06", asrBeg: "5:30", sunset: "7:35", ishaBeg: "9:16", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:38", ishaJam: "9:30", isFriday: true },
-            { sep: 12, day: "SAT", hijri: 30, fajrBeg: "4:32", sunrise: "6:37", zawal: "12:03", zuhrBeg: "1:05", asrBeg: "5:28", sunset: "7:32", ishaBeg: "9:13", fajrJam: "6:00", zuhrJam: "1:30", asrJam: "5:45", maghribJam: "7:35", ishaJam: "9:30" }
-        ];
-
+        // Tab Switcher
         function switchTab(tabId) {
             document.querySelectorAll('.tab-page').forEach(page => page.classList.remove('active-page'));
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('text-amber-300', 'border-b-2', 'border-amber-300');
+                btn.classList.add('hover:text-amber-300');
             });
 
             const activePage = document.getElementById(`page-${tabId}`);
             if (activePage) activePage.classList.add('active-page');
 
-            const activeBtn = document.getElementById(`nav-${tabId}`);
-            if (activeBtn) activeBtn.classList.add('text-amber-300', 'border-b-2', 'border-amber-300');
-
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('text-amber-300', 'border-b-2', 'border-amber-300');
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Toggle Mobile Navigation Menu
         function toggleMobileMenu() {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
         }
 
-        function setDonateAmt(amt) {
-            document.getElementById('customDonateInput').value = amt;
-        }
-
-        function renderTable() {
-            const tbody = document.getElementById('timetableBody');
-            tbody.innerHTML = '';
-
-            septemberData.forEach((row) => {
-                const tr = document.createElement('tr');
-                tr.className = row.isFriday ? 'bg-[#00502B] text-white font-bold' : 'bg-white text-black';
-
-                tr.innerHTML = `
-                    <td class="py-1 px-0.5 font-bold">${row.sep}</td>
-                    <td class="py-1 px-0.5 font-bold">${row.day}</td>
-                    <td class="py-1 px-0.5 font-bold">${row.hijri}</td>
-                    <td class="py-1 px-0.5">${row.fajrBeg}</td>
-                    <td class="py-1 px-0.5">${row.sunrise}</td>
-                    <td class="py-1 px-0.5">${row.zawal}</td>
-                    <td class="py-1 px-0.5">${row.zuhrBeg}</td>
-                    <td class="py-1 px-0.5">${row.asrBeg}</td>
-                    <td class="py-1 px-0.5">${row.sunset}</td>
-                    <td class="py-1 px-0.5 border-r-2 border-mosqueGold">${row.ishaBeg}</td>
-                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.fajrJam}</td>
-                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.zuhrJam}</td>
-                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.asrJam}</td>
-                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.maghribJam}</td>
-                    <td class="py-1 px-0.5 font-bold text-amber-700">${row.ishaJam}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderTable();
-            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('currentDateDisplay').textContent = new Date().toLocaleDateString('en-GB', dateOptions);
+        // Populate Dynamic Date Header
+        document.getElementById('currentDateDisplay').textContent = new Date().toLocaleDateString('en-GB', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
         });
+
+        // Sample Timetable Generator for September
+        const daysInMonth = 30;
+        const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+        const tbody = document.getElementById('timetableBody');
+
+        for (let i = 1; i <= daysInMonth; i++) {
+            const date = new Date(2026, 8, i); // September 2026
+            const dayName = daysOfWeek[date.getDay()];
+            const isFriday = dayName === 'FRI';
+
+            const tr = document.createElement('tr');
+            if (isFriday) tr.className = "bg-amber-100 font-bold";
+            else if (i % 2 === 0) tr.className = "bg-gray-50";
+
+            tr.innerHTML = `
+                <td class="py-1 px-0.5 font-bold">${i}</td>
+                <td class="py-1 px-0.5 ${isFriday ? 'text-red-700 font-black' : ''}">${dayName}</td>
+                <td class="py-1 px-0.5 text-gray-600">${i + 19} Rabi' I</td>
+                <td class="py-1 px-1">4:35</td>
+                <td class="py-1 px-1">6:12</td>
+                <td class="py-1 px-1">1:00</td>
+                <td class="py-1 px-1">1:05</td>
+                <td class="py-1 px-1">5:26</td>
+                <td class="py-1 px-1">7:30</td>
+                <td class="py-1 px-1 border-r-2 border-mosqueGold">9:10</td>
+                <td class="py-1 px-1 font-bold text-mosqueDarkGreen">6:00</td>
+                <td class="py-1 px-1 font-bold text-mosqueDarkGreen">1:30</td>
+                <td class="py-1 px-1 font-bold text-mosqueDarkGreen">5:45</td>
+                <td class="py-1 px-1 font-bold text-mosqueDarkGreen">7:33</td>
+                <td class="py-1 px-1 font-bold text-mosqueDarkGreen">9:30</td>
+            `;
+            tbody.appendChild(tr);
+        }
     </script>
 </body>
 </html>
