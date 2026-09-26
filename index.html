@@ -8,7 +8,7 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FontAwesome CDN -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
@@ -51,20 +51,20 @@
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans min-h-screen flex flex-col justify-between antialiased">
 
-    <!-- TOP EMERGENCY & LIVE BROADCAST BAR (EAST LONDON MOSQUE STYLE) -->
+    <!-- TOP EMERGENCY & LIVE BROADCAST BAR (EAST LONDON MOSQUE INSPIRATION) -->
     <div class="bg-red-800 text-white text-xs sm:text-sm py-2 px-4 shadow-inner no-print">
         <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
             <div class="flex items-center gap-3 font-bold">
                 <span class="bg-red-900 text-white px-2 py-0.5 rounded text-[10px] tracking-widest uppercase animate-pulse">24/7 EMERGENCY</span>
                 <i class="fa-solid fa-phone-flip"></i>
-                <span>Funeral: <a href="tel:07578359741" class="underline font-extrabold text-amber-300">07578 359741</a></span>
+                <span>Funeral Service Hotline: <a href="tel:07578359741" class="underline font-extrabold text-amber-300">07578 359741</a></span>
             </div>
             
             <div class="flex items-center gap-4 text-xs font-bold">
                 <div class="flex items-center gap-2 bg-red-900/60 px-3 py-1 rounded-full border border-red-700">
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                     <i class="fa-solid fa-radio text-amber-300"></i>
-                    <span>MCM Live Broadcast: <a href="#" class="underline text-amber-200">Listen via Mixlr</a></span>
+                    <span>MCM Radio Broadcast: <a href="#" class="underline text-amber-200">Listen via Mixlr</a></span>
                 </div>
                 <span class="hidden md:inline"><i class="fa-solid fa-location-dot text-amber-300 mr-1"></i> 20 Upper Park Rd, M14 5RU</span>
             </div>
@@ -98,6 +98,9 @@
                     <button onclick="switchTab('omof')" id="nav-omof" class="nav-btn hover:text-amber-300 transition-colors pb-1">OUR MASJID OUR FUTURE</button>
                     <button onclick="switchTab('services')" id="nav-services" class="nav-btn hover:text-amber-300 transition-colors pb-1">SERVICES & QA</button>
                     <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn hover:text-amber-300 transition-colors pb-1">CONTACT</button>
+                    <button onclick="switchTab('donate')" id="nav-donate" class="bg-mosqueGold hover:bg-yellow-500 text-mosqueDarkGreen font-black px-4 py-2 rounded-lg text-xs tracking-wider transition uppercase shadow">
+                        DONATE
+                    </button>
                 </nav>
 
                 <!-- MOBILE MENU BUTTON -->
@@ -115,7 +118,7 @@
             <button onclick="switchTab('omof'); toggleMobileMenu();" class="block w-full text-left font-bold text-white hover:text-amber-300 py-1">Our Masjid Our Future</button>
             <button onclick="switchTab('services'); toggleMobileMenu();" class="block w-full text-left font-bold text-white hover:text-amber-300 py-1">Services & QA</button>
             <button onclick="switchTab('contact'); toggleMobileMenu();" class="block w-full text-left font-bold text-white hover:text-amber-300 py-1">Contact Us</button>
-            <button onclick="switchTab('donate'); toggleMobileMenu();" class="block w-full text-center bg-mosqueGold text-mosqueDarkGreen font-black py-2.5 rounded mt-2">DONATE ONLINE NOW</button>
+            <button onclick="switchTab('donate'); toggleMobileMenu();" class="block w-full text-center bg-mosqueGold text-mosqueDarkGreen font-black py-2.5 rounded mt-2 uppercase tracking-wider">DONATE ONLINE NOW</button>
         </div>
     </header>
 
@@ -125,7 +128,7 @@
         <!-- PAGE 1: HOME -->
         <div id="page-home" class="tab-page active-page">
             
-            <!-- HERO SECTION WITH INTEGRATED HERO DONATE BUTTON BAR -->
+            <!-- HERO SECTION WITH HERO DONATE BUTTON BAR -->
             <section class="hero-gradient text-white py-16 lg:py-24 relative overflow-hidden">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left">
                     <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
@@ -137,7 +140,7 @@
                                 Serving Victoria Park & The Community Since 1948
                             </h1>
                             <p class="text-gray-200 text-base sm:text-lg max-w-2xl font-normal leading-relaxed">
-                                Daily congregational prayers, sacred Islamic education, funeral services, eco-friendly community spaces, and online learning.
+                                Daily congregational prayers, sacred Islamic education, 24/7 funeral services, eco-friendly community spaces, and online learning.
                             </p>
                             
                             <!-- HERO BAR BUTTON GROUP INCLUDING HERO DONATE BUTTON -->
@@ -202,7 +205,7 @@
                     </div>
                     <div>
                         <div class="text-3xl lg:text-4xl font-black text-amber-300">1,500+</div>
-                        <div class="text-xs uppercase tracking-wider font-semibold text-gray-300 mt-1">Capacity Capacity</div>
+                        <div class="text-xs uppercase tracking-wider font-semibold text-gray-300 mt-1">Mosque Capacity</div>
                     </div>
                     <div>
                         <div class="text-3xl lg:text-4xl font-black text-amber-300">24/7</div>
@@ -255,8 +258,8 @@
                         <div class="bg-white rounded-xl overflow-hidden shadow border border-gray-200">
                             <div class="bg-mosqueDarkGreen text-amber-300 text-xs font-bold px-4 py-2">ANNOUNCEMENT</div>
                             <div class="p-5 space-y-2">
-                                <span class="text-[10px] font-bold text-gray-400 uppercase">24 SEP 2026</span>
-                                <h3 class="font-extrabold text-mosqueDarkGreen text-base">GTSS Diploma Autumn Enrollment Open</h3>
+                                <span class="text-[10px] font-bold text-gray-400 uppercase">AUTUMN ENROLLMENT</span>
+                                <h3 class="font-extrabold text-mosqueDarkGreen text-base">GTSS Diploma Autumn Registration Open</h3>
                                 <p class="text-xs text-gray-600 leading-relaxed">Join our structured weekend Islamic sciences diploma course taught by resident scholars.</p>
                                 <button onclick="switchTab('academy')" class="text-xs font-bold text-mosqueGoldDark hover:underline inline-block pt-2">Read Details & Register →</button>
                             </div>
@@ -265,9 +268,9 @@
                         <div class="bg-white rounded-xl overflow-hidden shadow border border-gray-200">
                             <div class="bg-amber-500 text-mosqueDarkGreen text-xs font-bold px-4 py-2">COMMUNITY</div>
                             <div class="p-5 space-y-2">
-                                <span class="text-[10px] font-bold text-gray-400 uppercase">20 SEP 2026</span>
-                                <h3 class="font-extrabold text-mosqueDarkGreen text-base">Weekly Youth & Sisters Sports Club</h3>
-                                <p class="text-xs text-gray-600 leading-relaxed">Weekly sessions providing safe, active physical activities and mentorship for young Muslims.</p>
+                                <span class="text-[10px] font-bold text-gray-400 uppercase">WEEKLY SESSIONS</span>
+                                <h3 class="font-extrabold text-mosqueDarkGreen text-base">Youth & Sisters Physical Health Hub</h3>
+                                <p class="text-xs text-gray-600 leading-relaxed">Weekly sports sessions providing safe, active physical activities and mentorship for young Muslims.</p>
                                 <button onclick="switchTab('services')" class="text-xs font-bold text-mosqueGoldDark hover:underline inline-block pt-2">View Schedule →</button>
                             </div>
                         </div>
@@ -634,7 +637,7 @@
 
     </main>
 
-    <!-- COMPREHENSIVE FOOTER WITH SOCIAL LINKS -->
+    <!-- COMPREHENSIVE FOOTER WITH SOCIAL LINKS (@MCMVICTORIAPARK) -->
     <footer class="bg-mosqueDarkGreen text-white pt-12 pb-8 border-t-4 border-mosqueGold no-print">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-emerald-900">
@@ -680,7 +683,7 @@
                 <!-- COL 4: SOCIAL LINKS (@MCMVICTORIAPARK) -->
                 <div>
                     <h4 class="font-bold text-amber-300 text-xs uppercase tracking-wider mb-3">Connect With Us</h4>
-                    <p class="text-xs text-gray-300 mb-3">Follow our official channels @MCMVICTORIAPARK for daily updates and broadcasts.</p>
+                    <p class="text-xs text-gray-300 mb-3">Follow our official social accounts @MCMVICTORIAPARK for daily updates, live broadcasts, and announcements.</p>
                     <div class="flex items-center gap-3">
                         <a href="https://facebook.com" target="_blank" class="w-9 h-9 rounded-full bg-emerald-900 hover:bg-mosqueGold hover:text-mosqueDarkGreen transition flex items-center justify-center text-sm shadow">
                             <i class="fa-brands fa-facebook-f"></i>
@@ -733,7 +736,7 @@
             weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
         });
 
-        // Dynamic September Timetable Populator
+        // Dynamic Timetable Populator
         const tbody = document.getElementById('timetableBody');
         const daysOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
